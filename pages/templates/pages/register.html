@@ -1,0 +1,74 @@
+{% extends 'pages/base_log.html' %}
+
+{% block title %}註冊 | {{ block.super }}{% endblock title %}
+
+{% block head %}
+{{ block.super }}
+
+{% endblock head %}
+
+{% block body %}
+{{ block.super }}
+    <form class="form-signin" action="" method="post">
+    {% csrf_token %}
+        <div class="text-center mb-4">
+            <img class="mb-4" src="/static/other/bootstrap-solid.svg" alt="" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">註冊新帳號</h1>
+            <p>請輸入用戶名稱與密碼</p>
+        </div>
+
+        {% if user_is_wrong %}
+            <div class="alert alert-warning" role="alert">
+                {{ user_is_wrong }}
+            </div>
+        {% endif %}
+        <div class="form-label-group">
+            <input type="text" name="username" id="username" class="form-control" placeholder="用戶名稱" 
+            required="" autofocus="" value="{{username}}" aria-describedby="usernameHelpBlock">
+            <label for="username">用戶名稱</label>
+            <small id="usernameHelpBlock" class="form-text text-muted">
+                <ul>
+                    <li>必要的。150 個字或更少，只包含字母、數字和 @/./+/-/_。</li>
+                </ul>
+            </small>
+        </div>
+    
+        <div class="form-label-group">
+            <input type="password" name="password1" id="password1" minlength="8" pattern="[0-9a-zA-Z_]{8,}" 
+            class="form-control" placeholder="用戶密碼" required="" value="{{password1}}" aria-describedby="password1HelpBlock">
+            <label for="password1">用戶密碼</label>
+            <small id="password1HelpBlock" class="form-text text-muted">
+                <ul>
+                    <li>你的密碼不能與其他個人資訊太相近。</li>
+                    <li>你的密碼必須包含至少 8 個字元。</li>
+                    <li>你不能使用常見的密碼。</li>
+                    <li>你的密碼不能完全是數字。</li>
+                </ul>
+            </small>
+        </div>
+
+        {% if password_is_wrong %}
+            <div class="alert alert-warning" role="alert">
+                {{ password_is_wrong }}
+            </div>
+        {% endif %}
+        <div class="form-label-group">
+            <input type="password" name="password2" id="password2" minlength="8" pattern="[0-9a-zA-Z_]{8,}" 
+            class="form-control" placeholder="確認密碼" required="" aria-describedby="password2HelpBlock">
+            <label for="password2">確認密碼</label>
+            <small id="password2HelpBlock" class="form-text text-muted">
+                <ul>
+                    <li>為檢查用，請輸入與前面相同的密碼。</li>
+                </ul>
+            </small>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" style="cursor: pointer;">註冊</button>
+    </form>
+{% endblock body %}
+
+
+{% block script %}
+{{ block.super }}
+
+{% endblock script %}

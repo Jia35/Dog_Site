@@ -1,0 +1,150 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}狗狗平台{% endblock title %}</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="/static/css/jqm-demos.css">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="/static/js/index_JS.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	
+	{% block head %}{% endblock head %}
+</head>
+<body>
+	
+<div data-role="page" class="jqm-demos jqm-home">
+
+	<div data-role="header" class="jqm-header">
+		<h2><a href="{% url 'home' %}" title="Home" data-ajax="false"><img src="/static/images/icon.png" alt="icon"></a></h2>
+		<p>Version 1.1
+			{% if request.user.is_authenticated %}
+				<a href="/accounts/logout/" data-ajax="false">登出{{ request.user.username }}</a>
+			{% else %}
+				<a href="/accounts/login/" data-ajax="false">登入</a>
+			{% endif %}
+		</p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+		
+	</div>
+	
+	<div role="main" class="ui-content jqm-content">
+		{% block body %}
+	
+		{% endblock body %}
+	</div>
+
+	<div data-role="panel" class="jqm-navmenu-panel" data-position="left" data-display="overlay" data-theme="a">
+		<ul class="jqm-list ui-alt-icon ui-nodisc-icon">
+		<li data-filtertext="demos homepage" data-icon="home">
+			<h3 class="ui-collapsible-heading-collapsed">
+				<a href="{% url 'home' %}" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d" data-ajax="false">
+					首頁<span class="ui-collapsible-heading-status"> click to expand contents</span>
+				</a>
+			</h3>
+
+		</li>
+
+		<li data-filtertext="foster" data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+
+			<h3 class="ui-collapsible-heading-collapsed">
+				<a href="{% url 'foster' %}" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d" data-ajax="false">
+					寄養<span class="ui-collapsible-heading-status"> click to expand contents</span>
+				</a>
+			</h3>
+			<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+				<ul>
+					<li data-filtertext=""><a href="{% url 'foster' %}" class="contentUpdate" data-ajax="false">Part 1</a></li> 
+					<li data-filtertext=""><a href="{% url 'foster' %}" class="contentUpdate" data-ajax="false">推薦</a></li>
+					<li data-filtertext=""><a href="" class="contentUpdate" data-ajax="false">搜索</a></li>
+					<li data-filtertext=""><a href="" class="contentUpdate" data-ajax="false">篩選</a></li>
+					<li data-filtertext=""><a href="" class="contentUpdate" data-ajax="false">列表</a></li>
+				</ul>
+				
+			</div>
+		</li>
+
+		<li data-filtertext="message" data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+				
+			<h3 class="ui-collapsible-heading-collapsed">
+				<a href="{% url 'message' %}" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d" data-ajax="false">
+					消息<span class="ui-collapsible-heading-status"> click to expand contents</span>
+				</a>
+			</h3>
+			<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+				<ul>
+					<li data-filtertext=""><a href="" class="contentUpdate" data-ajax="false">通知</a></li>
+					<li data-filtertext=""><a href="" class="contentUpdate" data-ajax="false">聊天</a></li>
+				</ul>
+				
+			</div>
+		</li>
+
+
+
+		<li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
+				
+			<h3 class="ui-collapsible-heading-collapsed">
+				<a href="{% url 'mine' %}" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d" data-ajax="false">
+					使用者<span class="ui-collapsible-heading-status"> click to expand contents</span>
+				</a>
+			</h3>
+			<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+				<ul>
+					<li data-filtertext=""><a href="" class="contentUpdate" data-ajax="false">個人帳戶</a></li>
+					<li data-filtertext=""><a href="" class="contentUpdate" data-ajax="false">發布寄養</a></li>
+					<li data-filtertext=""><a href="" class="contentUpdate" data-ajax="false">寄養紀錄錄</a></li>
+					<li data-filtertext=""><a href="" class="contentUpdate" data-ajax="false">狗狗連結的設備（狗狗的項圈）</a></li>
+					<li data-filtertext=""><a href="" class="contentUpdate" data-ajax="false">設置</a></li>
+					<li data-filtertext=""><a href="" class="contentUpdate" data-ajax="false">登出</a></li>
+				</ul>
+				
+			</div>
+		</li>
+
+
+
+		</ul>
+	</div><!-- /panel -->
+
+
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<p>By IOT三人組</p>
+	</div><!-- /footer -->
+	<!-- TODO: This should become an external panel so we can add input to markup (unique ID) -->
+	<!-- 下面是搜索的按鈕 -->
+    <div data-role="panel" class="jqm-search-panel" data-position="right" data-display="overlay" data-theme="a">
+		<div class="jqm-search">
+			<ul class="jqm-list" data-filter-placeholder="Search demos..." data-filter-reveal="true">
+			<li data-filtertext="demos homepage" data-icon="home"><a href="{% url 'home' %}">Home</a></li>
+			<li data-filtertext="foster"><a href="{% url 'foster' %}">Foster</a></li>
+			<li data-filtertext="message"><a href="{% url 'message' %}">Message</a></li>
+			<li data-filtertext="introduction overview getting started"><a href="../intro/" data-ajax="false">Introduction</a></li>
+			<li data-filtertext="buttons button markup buttonmarkup method anchor link button element"><a href="../button-markup/" data-ajax="false">Buttons</a></li>
+			<li data-filtertext="form button widget input button submit reset"><a href="../button/" data-ajax="false">Button widget</a></li>
+
+
+			</ul>
+		</div>
+	</div><!-- /panel -->
+
+
+</div><!-- /page -->
+
+
+{% block script %}
+<script>
+
+</script>
+{% endblock script %}
+	
+	</body>
+
+</html>

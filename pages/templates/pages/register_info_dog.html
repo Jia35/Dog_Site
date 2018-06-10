@@ -1,0 +1,60 @@
+{% extends 'pages/base_log.html' %}
+
+{% block title %}新增狗狗資料 | {{ block.super }}{% endblock title %}
+
+{% block body %}
+{{ block.super }}
+    <form action="" method="post" class="form-signin" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="text-center mb-4">
+            <h1 class="h3 mb-3 font-weight-normal">新增狗狗資料</h1>
+            <p>請輸入正確的狗狗資料</p>
+        </div>
+
+        <div class="form-label-group">
+            <input type="text" name="name" id="name" class="form-control" placeholder="狗名" required="" value="{{name}}">
+            <label for="name">狗名</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="file" name="picture" id="picture" class="form-control" placeholder="照片" value="{{picture}}">
+            <label for="picture">照片</label>
+        </div>
+
+        <!--div class="form-label-group">
+            <input type="text" name="gender" id="gender" class="form-control" placeholder="性別" required="" value="{{gender}}">
+            <label for="gender">性別</label>
+        </div-->
+
+        <div class="form-label-group">
+            <span >性別</span>
+            <select class="form-control" name="gender" id="gender" required="">
+                <option value="" selected disabled hidden>請選擇性別...</option>
+                <option value="公">公</option>
+                <option value="母">母</option>
+            </select>
+        </div>
+
+        {% if age_is_wrong %}
+            <div class="alert alert-warning" role="alert">
+                {{ age_is_wrong }}
+            </div>
+        {% endif %}
+        <div class="form-label-group">
+            <input type="text" name="age" id="age" class="form-control" placeholder="狗齡" required="" value="{{age}}">
+            <label for="age">狗齡</label>
+        </div>
+        
+        <div class="form-label-group">
+            <input type="text" name="breed" id="breed" class="form-control" placeholder="品種" required="" value="{{breed}}">
+            <label for="breed">品種</label>
+        </div>
+        <div class="form-label-group">
+            <input type="text" name="character" id="character" class="form-control" placeholder="性格" value="{{character}}">
+            <label for="character">性格</label>
+        </div>
+
+        <input type="hidden" name="ok" value="yes">        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">送出</button>
+    </form>
+{% endblock body %}

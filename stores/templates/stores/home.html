@@ -1,0 +1,127 @@
+{% extends 'stores/base.html' %}
+
+{% block title %}Home | {{ block.super }}{% endblock title %}
+
+{% block nav1 %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}"><strong>首頁</strong></a>
+    </li>
+{% endblock nav1 %}
+    
+
+{% block head %}
+{{ block.super }}
+    <style>
+        #map {
+        height: 60vh;
+        width: 100%;
+        }
+    </style>
+{% endblock head %}
+
+{% block main %}
+{{ block.super }}
+<div class="introduce-bg2 introduce-mid">
+    <h1><span class="badge badge-secondary">Home</span></h1>
+    <!--img src="/static/images/2.png" width="600" alt="test"-->
+    {% if not mydog %}
+        <p>快去養隻狗吧~</p>
+    {% else %}
+        <img src='/media/{{ mydog.picture }}' width="5%" alt="dog_pictures"/>
+        {{mydog.name}}
+        <hr>
+        
+        <h4>活動路徑</h4>
+        <form class="form-signin" action="" method="post">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-2">
+                        <input type="date" name="gpsdate" value={{gpsdate}}>
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-primary btn-block" type="submit">選取</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        {% if not gpshtml %}
+            <p>請選擇有GPS紀錄的日期--6/10</p>
+        {% else %}
+            <div id="map"></div>
+            <br />
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                    <tr>
+                    <th>狗名</th>
+                    <th>緯度</th>
+                    <th>經度</th>
+                    <th>日期</th>
+                    <th>時間</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for gps in gpshtml %}
+                    <tr>
+                        <td> {{ gps.dog }} </td>
+                        <td> {{ gps.latitude }} </td>
+                        <td> {{ gps.longitude }} </td>
+                        <td> {{ gps.date }} </td>
+                        <td> {{ gps.time }} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    {% endif %}
+</div>
+
+{% endblock main %}
+
+
+{% block script %}
+{{ block.super }}
+
+<script type="text/javascript">
+    var gps = {{gpss|safe}};
+    var place = [];
+
+    for(var i=0; i<gps.length; i++) { 
+        place.push({lat: parseFloat(gps[i].latitude), lng: parseFloat(gps[i].longitude), time:gps[i].time})
+    }
+
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 5,
+            //center: place[place.length-1]
+        });
+        var flightPlanCoordinates = place;
+        var flightPath = new google.maps.Polyline({
+            path: flightPlanCoordinates,
+            map: map,
+            geodesic: true
+        });
+        /*var marker = new google.maps.Marker({
+            position: place[0],
+            map: map,
+            title: '起始點'
+        });*/
+        
+        var bounds = new google.maps.LatLngBounds();
+        $.each(place, function (i, area) {
+            bounds.extend(new google.maps.LatLng(area.lat, area.lng));
+            var beachMarker = new google.maps.Marker({
+                position: {lat: area.lat, lng: area.lng},
+                map: map,
+                title: '地點'+area.time.substr(0,5)
+            });
+        })
+        //if (place.length > 1)
+            map.fitBounds(bounds);
+    }
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZ4nW4jPIIfFkyndzyZvdwaNXrikcKzxM&callback=initMap" async defer></script>
+
+{% endblock script %}

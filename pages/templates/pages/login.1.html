@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        
+        <title>使用者登入</title>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        
+        <link href="/static/css/floating-labels.css" rel="stylesheet">
+    </head>
+
+
+    <body>
+    <form class="form-signin">
+        <div class="text-center mb-4">
+            <h1 class="h3 mb-3 font-weight-normal">使用者登入</h1>
+            <p>請輸入正確的使用者信箱與密碼 <a href="https://www.google.com.tw/">忘記密碼?</a></p>
+        </div>
+
+        <div class="form-label-group">
+                <input type="email" name="username" id="username" class="form-control" placeholder="用戶名稱" required="" autofocus="">
+                <label for="inputEmail">用戶名稱</label>
+            </div>
+        
+            <div class="form-label-group">
+                <input type="password" name="password" id="password" class="form-control" placeholder="用戶密碼" required="">
+                <label for="inputPassword">用戶密碼</label>
+            </div>
+
+        <!--div class="checkbox mb-3">
+            <label>
+            <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div-->
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
+        <p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
+    </form>
+	
+	</body>
+</html>
+
+
+<!--
+{% extends 'pages/base.html' %}
+
+{% block title %}使用者登入 | {{ block.super }}{% endblock title %}
+
+{% block head %}
+{{ block.super }}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="/static/css/floating-labels.css" rel="stylesheet">
+{% endblock head %}
+
+{% block body %}
+{{ block.super }}
+<form class="form-signin">
+    <div class="text-center mb-4">
+        <img class="mb-4" src="/static/other/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">使用者登入</h1>
+        <p>請輸入正確的使用者名稱與密碼 <a href="https://www.google.com.tw/">忘記密碼?</a></p>
+    </div>
+
+    <div class="form-label-group">
+        <input type="email" name="username" id="username" class="form-control" placeholder="用戶名稱" required="" autofocus="">
+        <label for="inputEmail">用戶名稱</label>
+    </div>
+
+    <div class="form-label-group">
+        <input type="password" name="password" id="password" class="form-control" placeholder="用戶密碼" required="">
+        <label for="inputPassword">用戶密碼</label>
+    </div>
+
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" value="remember-me"> Remember me
+        </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
+    <p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
+  </form>
+-->
+
+    <!-- old -->
+    <!--form action="" method="post">
+        {% csrf_token %}
+        <label for="username">用戶名稱:</label>
+        <input type="text" name="username" value="" id="username">
+        <br />
+        <label for="password">用戶密碼:</label>
+        <input type="password" name="password" value="" id="password">
+        <br />
+        <input class="btn btn-default" type="submit" value="登入" />
+    </form>
+    <br />
+    <a class="btn btn-default" href="/accounts/register/">註冊</a-->
+
+<!--
+{% endblock body %}
+-->

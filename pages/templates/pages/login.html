@@ -1,0 +1,42 @@
+{% extends 'pages/base_log.html' %}
+
+{% block title %}使用者登入 | {{ block.super }}{% endblock title %}
+
+{% block body %}
+{{ block.super }}
+    
+    <form class="form-signin" action="" method="post">
+    {% csrf_token %}
+        <div class="text-center mb-4">
+            <img class="mb-4" src="/static/other/bootstrap-solid.svg" alt="" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">使用者登入</h1>
+            <p>請輸入正確的用戶名稱與密碼</p>
+        </div>
+
+        {% if error_message %}
+            <div class="alert alert-warning" role="alert">
+                {{ error_message }}
+            </div>
+        {% endif %}
+        <div class="form-label-group">
+            <input type="text" name="username" id="username" class="form-control" placeholder="用戶帳號" required="" autofocus="">
+            <label for="username">用戶帳號</label>
+        </div>
+    
+        <div class="form-label-group">
+            <input type="password" name="password" id="password" minlength="8" pattern="[0-9a-zA-Z]{8,}" class="form-control" placeholder="用戶密碼" required="">
+            <label for="password">用戶密碼</label>
+        </div>
+            
+        <!--div class="checkbox mb-3">
+            <label>
+            <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div--> 
+        <button class="btn btn-lg btn-primary btn-block" type="submit" style="cursor: pointer;">登入</button>
+    </form>
+    <div class="text-center">
+        沒有帳號密碼? <a href="/accounts/register/"><b>註冊</b></a>
+    </div>
+
+{% endblock body %}

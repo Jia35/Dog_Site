@@ -1,0 +1,254 @@
+{% extends 'stores/base.html' %}
+
+{% block title %}寄養 | {{ block.super }}{% endblock title %}
+
+{% block head %}
+{{ block.super }}
+    <!--link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css">
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script-->
+{% endblock head %}
+
+{% block nav3 %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'foster' %}"><strong>寄養</strong></a>
+    </li>
+{% endblock nav3 %}
+
+
+{% block main %}
+{{ block.super }}
+<div class="introduce-bg2 introduce-mid">
+    <h1><span class="badge badge-secondary">寄養</span></h1>
+
+    <h3>用戶列表</h3>
+    <p>點擊可查看詳細資訊</p>
+    <!--form action="" method="post">
+    {% csrf_token %}
+        <input type="text" name="searchUser" value="" size="3">
+        <button type="submit" name="searchButton">搜尋</button>
+    </form-->
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+            <th>照片</th>
+            <th>姓名</th>
+            <th>性別</th>
+            <!--th>電話</th-->
+            <th>住區</th>
+            <!--th>住家環境</th-->
+            <!--th>設施</th-->
+            <th>評分</th>
+            <th>評價</th>
+            <!--th>加入日期</th-->
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in alluser %}
+            <tr style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal" data-whatever="{{ user.account }}">
+                <td> <img src='/media/{{ user.picture }}' width="80" alt="user_pictures"/> </td>
+                <td> {{ user.name }} </td>
+                <td> {{ user.gender }} </td>
+                <!--td> {{ user.phone_number }} </td-->
+                <td> {{ user.residential_location }} </td>
+                <!--td> {{ user.housing_condition }} </td-->
+                <!--td> {{ user.equipment }} </td-->
+                <td> {{ user.score }} </td>
+                <td> {{ user.evaluation }} </td>
+            </tr>
+            {% endfor %} 
+        </tbody>
+    </table>
+
+
+    <!--互動視窗-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">個人資訊</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="html_dpicture" src="" class="rounded mx-auto d-block introduce-mid" alt="No dogs">
+				<br>
+				<div class="row no-gutters introduce-mid">
+					<!-- 使用者資料 -->
+					<div class="col-sm-8">
+						<div class="row introduce-mid">
+							<h3 id="html_name">茂伯</h3>
+						</div>
+						<div class="row introduce-mid">
+							<p id="html_gender">男性-已婚</p>
+						</div>
+						<div class="row introduce-mid">
+							<p id="html_residential_location">雲林縣虎尾鎮建成路</p>
+						</div>
+					</div>
+					<div class="col-sm-4">
+                        <img id="html_picture" src=""  class="rounded-circle mx-auto d-block introduce-mid" alt="Responsive image">
+					</div>
+				</div>
+                <hr>
+                
+				<div class="row no-gutters introduce-mid">
+					<!-- 狗狗簡介 -->
+					<div class="col-sm-6">
+						<div class="row introduce-mid">
+							<div class="col-sm-4">
+								<img src="/static/images/icon/plain-dog.png"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
+							</div>
+							<div class="col-sm-6">
+								<span id="html_dbreed" class="align-middle">小鬥犬</span>
+							</div>
+						</div>
+						
+						<div class="row introduce-mid">
+							<div class="col-sm-4">
+								<img src="/static/images/icon/flash.png"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
+							</div>
+							<div class="col-sm-6">
+								<span id="html_dcharacter" class="align-middle">溫和</span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-sm-6">
+						<div class="row  introduce-mid">
+							<div class="col-sm-4">
+								<img src="/static/images/icon/age.svg"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
+							</div>
+							<div class="col-sm-6">
+								<span id="html_dage" class="align-middle">3 歲</span>
+							</div>
+						</div>
+						
+						<div class="row introduce-mid">
+							<div class="col-sm-4">
+								<img src="/static/images/icon/res.png"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
+							</div>
+							<div class="col-sm-6">
+								<span id="html_dfavorite_food" class="align-middle">高麗菜</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				
+				<div class="row no-gutters introduce-mid">
+					<div class="row no-gutters introduce-mid">
+						<p id="html_introduce">茂伯曾榮獲金馬獎，並且擔任遛狗理事會的理事長。為人大方並富有鄉土味，是台灣土狗代遛的最佳人選。</p>
+					</div>
+				</div>
+                <hr>
+                
+				<div class="row no-gutters introduce-mid">
+					<div class="row no-gutters introduce-mid">
+						<p><i>這裏面放遛狗的GPS路徑圖</i></p>
+					</div>
+				</div>
+				<hr>
+				
+				<div class="row no-gutters introduce-mid">
+					<div class="col-sm-10">
+						<p>可預定日期</p>
+					</div>
+					<div class="col-sm-2">
+                        <a href="" class="btn btn-outline-success my-2 my-sm-0">查看</a>
+					</div>
+				</div>
+                <hr>
+                
+                <div class="row no-gutters introduce-mid">
+                    <div class="col-sm-10">
+                        <p>聯絡狗狗的主人</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="" class="btn btn-outline-success my-2 my-sm-0">聯絡</a>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row no-gutters introduce-mid">
+                    <div class="col-sm-10">
+                        <p>寄養規則</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="" class="btn btn-outline-success my-2 my-sm-0">立即預定</a>
+                    </div>
+                </div>
+                <hr>
+				
+				<div class="row no-gutters introduce-mid">
+					<div class="col-sm-10">
+						<p id="html_residential_location1">632雲林縣虎尾鎮建成路</p>
+					</div>
+					<div class="col-sm-2">
+						<a href="" class="btn btn-lg btn-warning">立即預定</a>
+					</div>
+				</div>
+
+
+            </div>
+            
+        </div>
+    </div>
+    </div>
+
+{% endblock main %}
+
+
+{% block script %}
+{{ block.super }}
+<script type="text/javascript">
+    var allusers = {{allusers|safe}};
+    var alldogs = {{alldogs|safe}};
+    
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)     // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        var modal = $(this)
+        var clickUser = allusers.find(function(item, index, array){
+            return item.account == recipient;
+        });
+
+        var clickDog = alldogs.find(function(item, index, array){
+            return item.master_id == clickUser.id;
+        });
+        modal.find('#html_name').text(clickUser.name)
+        //$("#html_picture").attr("src","/media/" + clickUser.picture); 
+        document.getElementById('html_picture').src = "/media/" + clickUser.picture;
+        modal.find('#html_gender').text(clickUser.gender)
+        modal.find('#html_phone_number').text(clickUser.phone_number)
+        modal.find('#html_residential_location').text(clickUser.residential_location)
+        modal.find('#html_residential_location1').text(clickUser.residential_location)
+        modal.find('#html_housing_condition').text(clickUser.housing_condition)
+        modal.find('#html_equipment').text(clickUser.equipment)
+        modal.find('#html_score').text(clickUser.score)
+        modal.find('#html_evaluation').text(clickUser.evaluation)
+        modal.find('#html_introduce').text(clickUser.introduce)
+
+        if (clickDog){
+            modal.find('#html_dbreed').text(clickDog.breed)
+            document.getElementById('html_dpicture').src = "/media/" + clickDog.picture;
+            modal.find('#html_dcharacter').text(clickDog.character)
+            modal.find('#html_dage').text(clickDog.age + " 歲")
+            modal.find('#html_dfavorite_food').text(clickDog.favorite_food)
+
+        }
+        else{
+            modal.find('#html_dbreed').text("沒養狗")
+            document.getElementById('html_dpicture').src = "";
+            modal.find('#html_dcharacter').text("沒養狗")
+            modal.find('#html_dage').text("沒養狗")
+            modal.find('#html_dfavorite_food').text("沒養狗")
+        }
+        //console.log(clickUser)
+        //console.log(clickDog)
+    })
+
+</script>
+
+{% endblock script %}

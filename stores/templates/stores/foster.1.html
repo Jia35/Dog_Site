@@ -1,0 +1,158 @@
+{% extends 'stores/base.html' %}
+
+{% block title %}寄養 | {{ block.super }}{% endblock title %}
+
+{% block head %}
+{{ block.super }}
+    <!--link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css">
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script-->
+{% endblock head %}
+
+{% block navbar %}
+{{ block.super }}
+<ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'home' %}"><strong>首頁</strong> <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link disabled" href="{% url 'foster' %}"><strong>寄養</strong></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled" href="{% url 'message' %}"><strong>消息</strong></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link disabled" href="{% url 'mine' %}"><strong>使用者</strong></a>
+        <!--http://iotpetcare.byethost33.com/IOT/user_displacement.html-->
+    </li>
+</ul>
+{% endblock navbar %}
+
+{% block body %}
+{{ block.super }}
+<div class="introduce-bg2 introduce-mid">
+    <h1><span class="badge badge-secondary">寄養</span></h1>
+
+    <h3>用戶列表</h3>
+    <h5><I>點擊笑臉，可察看詳細資訊，但目前顯示尚有小bug</I></h5>
+    <!--form action="" method="post">
+    {% csrf_token %}
+        <input type="text" name="searchUser" value="" size="3">
+        <button type="submit" name="searchButton">搜尋</button>
+    </form-->
+
+    <table class="table table-bordered table-hover table-condensed">
+        <tr>
+            <th>資訊</th>
+            <th>照片</th>
+            <th>姓名</th>
+            <th>性別</th>
+            <!--th>電話</th-->
+            <th>住區</th>
+            <!--th>住家環境</th-->
+            <!--th>設施</th-->
+            <th>評分</th>
+            <th>評價</th>
+            <!--th>加入日期</th-->
+        </tr>
+        {% for user in alluser %}
+            <tr>
+                <td style="cursor: pointer;" onclick = "showAlert( '{{ user.name }}' );"> 😃 </td>
+                <td> <img src='/media/{{ user.picture }}' width="80" alt="user_pictures"/> </td>
+                <td> {{ user.name }} </td>
+                <td> {{ user.gender }} </td>
+                <!--td> {{ user.phone_number }} </td-->
+                <td> {{ user.residential_location }} </td>
+                <!--td> {{ user.housing_condition }} </td-->
+                <!--td> {{ user.equipment }} </td-->
+                <td> {{ user.score }} </td>
+                <td> {{ user.evaluation }} </td>
+            </tr>
+        {% endfor %} 
+    </table>
+
+
+    <div id="dialog_1" title="個人資訊...">
+        <table class="table table-bordered table-hover table-condensed">
+            <tr>
+                <th>姓名</th>
+                <th>性別</th>
+                <th>電話</th>
+                <th>住區</th>
+                <th>住家環境</th>
+                <th>設施</th>
+                <th>評分</th>
+                <th>評價</th>
+            </tr>
+            <tr>
+                <td id="html_name"></td>
+                <td id="html_gender"></td>
+                <td id="html_phone_number"></td>
+                <td id="html_residential_location"></td>
+                <td id="html_housing_condition"></td>
+                <td id="html_equipment"></td>
+                <td id="html_score"></td>
+                <td id="html_evaluation"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+{% endblock body %}
+
+
+{% block script %}
+{{ block.super }}
+<script type="text/javascript">
+    var allusers = {{allusers|safe}};
+    
+    $(function() {
+        $( "#dialog_1" ).dialog({
+            autoOpen: false,
+            //modal: true,
+            show: {
+                effect:'clip',
+                duration: 300,
+            },
+            hide: {
+                effect:'clip',
+                duration: 300,
+            },
+            buttons: {
+                "聯繫主人": function () {
+                    location.href="/message/";
+                },
+                Close: function () {
+                    $(this).dialog("close");
+                }
+            },
+            width: '60vw',
+            height: 'auto',
+            resizable: false,
+        });
+    });
+    function showAlert(user)
+    {
+        $( "#dialog_1" ).dialog( "open" );
+        //document.getElementById("dialog_1").textContent = user;
+        
+        var clickUser = allusers.find(function(item, index, array){
+            return item.name == user;
+        });
+        
+        document.getElementById("html_name").textContent = clickUser.name;
+        document.getElementById("html_gender").textContent = clickUser.gender;
+        document.getElementById("html_phone_number").textContent = clickUser.phone_number;
+        document.getElementById("html_residential_location").textContent = clickUser.residential_location;
+        document.getElementById("html_housing_condition").textContent = clickUser.housing_condition;
+        document.getElementById("html_equipment").textContent = clickUser.equipment;
+        document.getElementById("html_score").textContent = clickUser.score;
+        document.getElementById("html_evaluation").textContent = clickUser.evaluation;
+        //console.log(clickUser)
+
+    }
+
+</script>
+
+
+
+{% endblock script %}

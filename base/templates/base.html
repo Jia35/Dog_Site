@@ -1,0 +1,235 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}狗狗寄養平台{% endblock title %}</title>
+
+	<!--link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<link rel="stylesheet" href="/static/css/jqm-demos.css">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="/static/js/index_JS.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script-->
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <!-- 匯入自己的css >
+    <link rel="stylesheet" href="custom.css"-->
+    
+    <!--https://www.minwt.com/webdesign-dev/css/2094.html
+    https://wcc723.github.io/sass/2014/02/21/font-code-range/-->
+    <style>
+    body {
+        font-family:"MS Sans Serif", "微軟正黑體", "新細明體", "細明體" ;
+    }
+    
+    .introduce-bg2{
+        background-color : #F6F6F6;
+        padding : 20px;
+    }
+    .introduce-mid{
+        width : 80%;
+        margin : auto;
+    }
+    .introduce-googlook{
+        width : 70%;
+    }
+    .navbar-width{
+        width : 40%;
+    }
+    .star-width{
+        width:20%;
+        height : 20%;
+    }
+    .popover{
+        width: 100%;
+    }
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120533715-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-120533715-1');
+    </script>
+
+    {% block head %}
+    {% endblock head %}
+    
+</head>
+
+
+<body>
+    <!-- 導航欄 fixed-top -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand navbar-width" href="{% url 'home' %}">
+        <img src="/static/images/Logo.png" width="40%" class="img-fluid float-left" alt="Responsive image">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {% block nav1 %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}"><strong>首頁</strong></a>
+                </li>
+            {% endblock nav1 %}
+            {% block nav2 %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}"><strong>關於</strong></a>
+                </li>
+            {% endblock nav2 %}
+            {% block nav3 %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'foster' %}"><strong>寄養</strong></a>
+                </li>
+            {% endblock nav3 %}
+            {% block nav4 %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'message' %}"><strong>消息</strong></a>
+                </li>
+            {% endblock nav4 %}
+            {% block nav5 %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <strong>使用者</strong>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'mine' %}">       資訊</a>
+                        <a class="dropdown-item" href="{% url 'collection' %}"> 收藏</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'setting' %}">
+                            <img src="/static/images/icon/settings.svg" width="20" height="20" class="d-inline-block align-top" alt="settings">
+                            設置
+                        </a>
+                    </div>
+                </li>
+            {% endblock nav5 %}
+        </ul>
+
+
+        <form class="form-inline my-2 my-lg-0">
+        <a class="text-dark">標題搜尋：</a>
+        <input type="search" id="myPopover" class="form-control mr-sm-2 light-table-filter" data-table="order-table" data-toggle="popover" 
+        title="搜尋結果" data-html="true" data-placement="bottom" data-content="" placeholder="請輸入關鍵字">
+        <!--button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜尋</button-->
+        {% if request.user.is_authenticated %}
+            <a href="/accounts/logout/" data-ajax="false" class="mr-sm-3">登出 {{ request.user.username }}</a>
+        {% else %}
+            <a href="/accounts/login/" data-ajax="false" class="mr-sm-3">登入</a>
+        {% endif %}
+        </form>
+    </div>
+    </nav>
+    
+    <hr>
+    {% block main %}
+    
+    {% endblock main %}
+
+    <hr>
+    <p class="mt-5 mb-3 text-muted text-center">© IoT 狗狗寄養平台 2018</p>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript">
+        (function(document) {
+            'use strict';
+          
+            // 建立 LightTableFilter
+            var LightTableFilter = (function(Arr) {
+                var _input;
+          
+                // 資料輸入事件處理函數
+                function _onInputEvent(e) {
+                    _input = e.target;
+                    var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                    Arr.forEach.call(tables, function(table) {
+                        Arr.forEach.call(table.tBodies, function(tbody) {
+                            Arr.forEach.call(tbody.rows, _filter);
+                        });
+                    });
+                }
+            
+                // 資料篩選函數，顯示包含關鍵字的列，其餘隱藏
+                function _filter(row) {
+                    var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                    row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+                }
+          
+                return {
+                    // 初始化函數
+                    init: function() {
+                        var inputs = document.getElementsByClassName('light-table-filter');
+                        Arr.forEach.call(inputs, function(input) {
+                            input.oninput = _onInputEvent;
+                        });
+                    }
+                };
+            })(Array.prototype);
+          
+            // 網頁載入完成後，啟動 LightTableFilter
+            document.addEventListener('readystatechange', function() {
+                if (document.readyState === 'complete') {
+                    LightTableFilter.init();
+                }
+            });
+          
+          })(document);
+    </script>
+
+    <script type="text/javascript">
+        $('[data-toggle="popover"]').popover()
+        
+        $('#myPopover').on('show.bs.popover', function (event) {
+            var test= document.getElementById("myPopover");
+            test.setAttribute("data-content", ContentMethod());
+        })
+        
+        function ContentMethod() {
+            return '\
+                <table class="order-table">\
+                    <tbody>\
+                        <tr>\
+                            <td><a href="/home/">首頁</a></td>\
+                        </tr>\
+                        <tr>\
+                            <td><a href="/about/">關於</a></td>\
+                        </tr>\
+                        <tr>\
+                            <td><a href="/foster/">寄養</a></td>\
+                        </tr>\
+                        <tr>\
+                            <td><a href="/message/">消息</a></td>\
+                        </tr>\
+                        <tr>\
+                            <td><a href="/mine/">資訊</a></td>\
+                        </tr>\
+                    </tbody>\
+                </table>\
+                ';
+        }
+    </script>
+
+    {% block script %}
+    {% endblock script %}
+	
+</body>
+
+</html>

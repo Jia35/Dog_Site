@@ -1,0 +1,67 @@
+{% extends 'stores/base.html' %}
+
+{% block title %}消息 | {{ block.super }}{% endblock title %}
+
+
+{% block nav4 %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'message' %}"><strong>消息</strong></a>
+    </li>
+{% endblock nav4 %}
+
+
+{% block main %}
+{{ block.super }}
+<div class="introduce-bg2 introduce-mid">
+    <h1><span class="badge badge-secondary">消息-</span></h1>
+    <!--h4><I>做不太出來...</I>😭😭😭</h4>
+    <img src="/static/images/dog02.jpg" width="400" alt="dog02.jpg"-->
+    <p><i>固定對話，演示用</i></p>
+    <div class="container">
+        {% for message in messages %}
+            {% if message.account == account %}
+                <div class="row justify-content-end">
+                    <div class="col-4 text-muted text-right">
+                        {{message.timestamp}}
+                    </div>
+                    <div class="col-4 rounded text-right" style="background-color:#d8d8d8;">
+                        {{message.text}}
+                    </div>
+                    <div class="col-2">
+                        ：{{message.name}}
+                    </div>
+                </div>
+                <hr>
+            {% else %}
+                <div class="row justify-content-start">
+                    <div class="col-2">
+                        {{message.name}}：
+                    </div>
+                    <div class="col-4 rounded" style="background-color:#d8d8d8;">
+                        {{message.text}}
+                    </div>
+                    <div class="col-4 text-muted">
+                        {{message.timestamp}}
+                    </div>
+                </div>
+                <hr>
+            {% endif %}
+        {% endfor %}
+    </div>
+    
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="請輸入訊息...">
+        <div class="input-group-append">
+            <button type="button" class="btn btn-primary">發送</button>
+        </div>
+    </div>
+
+</div>
+
+{% endblock main %}
+
+
+
+{% block script %}
+
+{% endblock script %}

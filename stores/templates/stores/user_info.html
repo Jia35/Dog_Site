@@ -1,0 +1,107 @@
+{% extends 'stores/base.html' %}
+
+{% block title %}資訊-{{ thisuser.name }} | {{ block.super }}{% endblock title %}
+
+{% block nav5 %}
+    <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <strong>使用者</strong>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'mine' %}">       資訊</a>
+            <a class="dropdown-item" href="{% url 'collection' %}"> 收藏</a>
+            <a class="dropdown-item" href="{% url 'setting' %}">
+                <img src="/static/images/icon/settings.svg" width="20" height="20" class="d-inline-block align-top" alt="settings">
+                設置
+            </a>
+        </div>
+    </li>
+{% endblock nav5 %}
+
+
+{% block main %}
+{{ block.super }}
+<div class="introduce-bg2 introduce-mid">
+    <h1><span class="badge badge-secondary">資訊-{{ thisuser.name }}</span></h1>
+
+    <table class="table table-bordered table-hover table-condensed">
+        <tr>
+            <th>照片</th>
+            <th>姓名</th>
+            <th>性別</th>
+            <th>電話</th>
+            <th>住區</th>
+            <th>住家環境</th>
+            <th>設施</th>
+            <th>評分</th>
+            <th>評價</th>
+            <!--th>加入日期</th-->
+        </tr>
+        <tr>
+            <td> <img src='/media/{{ thisuser.picture }}' width="80" alt="user_pictures"/> </td>
+            <td> {{ thisuser.name }} </td>
+            <td> {{ thisuser.gender }} </td>
+            <td> {{ thisuser.phone_number }} </td>
+            <td> {{ thisuser.residential_location }} </td>
+            <td> {{ thisuser.housing_condition }} </td>
+            <td> {{ thisuser.equipment }} </td>
+            <td> {{ thisuser.score }} </td>
+            <td> {{ thisuser.evaluation }} </td>
+            <!--td> {{ thisuser.creation_date }} </td-->
+        </tr>
+    </table>
+
+    <h3>他的狗</h3>
+        {% if thisuser.dogs_set.all %}
+            <h4>他有養{{ thisuser.dogs_set.all|length }}隻狗</h4>
+            <table class="table table-bordered table-hover table-condensed">
+                <tr>
+                    <th>照片</th>
+                    <th>狗名</th>
+                    <th>性別</th>
+                    <th>年齡</th>
+                    <th>品種</th>
+                    <th>性格</th>
+                    <th>寄養</th>
+                </tr>
+            {% for dog in thisuser.dogs_set.all %}
+                <tr>
+                    <td> <img src='/media/{{ dog.picture }}' width="80" alt="dog_pictures"/> </td>
+                    <td> {{ dog.name }} </td>
+                    <td> {{ dog.gender }} </td>
+                    <td> {{ dog.age }} </td>
+                    <td> {{ dog.breed }} </td>
+                    <td> {{ dog.character }} </td>
+                    <td> {% if dog.is_foster %} 寄養中 {% else %} 在家 {% endif %} </td>
+                </tr>
+            {% endfor %}
+            </table>
+            </form>
+        {% else %}
+            <p>他沒有養Dog呀~</p>
+        {% endif %}
+    
+    <hr>
+    
+    <div class="btn-toolbar justify-content-between">
+        <h4>可預定日期</h4>
+        <button type="button" class="btn btn-info">查看</button>
+    </div>
+    <hr>
+    <div class="btn-toolbar justify-content-between">
+        <h4>聯絡狗主人</h4>
+        <button type="button" class="btn btn-info">聯絡</button>
+    </div>
+    <hr>
+    <div class="btn-toolbar justify-content-between">
+        <h4>寄養規則</h4>
+        <button type="button" class="btn btn-info">查看</button>
+    </div>
+
+    <!--nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="navbar-brand" href="#">Fixed bottom</a>
+    </nav-->
+
+</div>
+{% endblock main %}
+

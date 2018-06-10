@@ -1,0 +1,27 @@
+--	開啟虛擬環境
+	..\venv\dogsite\Scripts\activate 
+
+--	建置APP
+	python manage.py startapp [restaurants] 
+
+啟動server
+python manage.py runserver 
+
+建立資料表
+python manage.py check 
+建立migration檔
+python manage.py makemigrations
+模型與資料庫同步
+python manage.py migrate
+
+--	創建超級使用者
+	(python manage.py migrate) 
+	python manage.py createsuperuser 
+
+--	django終端機
+	python manage.py shell 
+
+--	測試指令
+	python manage.py test 
+
+	python manage.py collectstatic

@@ -1,0 +1,126 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}關於 | {{ block.super }}{% endblock title %}
+
+{% block nav2 %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'about' %}"><strong>關於</strong></a>
+    </li>
+{% endblock nav2 %}
+
+
+{% block main %}
+{{ block.super }}
+
+<div class="introduce-bg2 introduce-mid">
+    <h1><span class="badge badge-secondary">關於</span></h1>
+
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer;background-color:#ededed;">
+                <button class="btn btn-link" style="cursor: pointer;">
+                    什麼是狗狗寄養平台?
+                </button>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    狗狗寄養平台是因應現代人忙碌或外出，造成家中的狗狗沒人照顧的問題，而產生出來的服務平台。
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="cursor: pointer;background-color:#ededed;">
+                <button class="btn btn-link" style="cursor: pointer;">
+                    誰可以使用狗狗寄養平台?
+                </button>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                    只要是你有養狗，或者你喜歡狗，再或者你喜歡牽著狗外出遛遛，我們都歡迎你們來使用狗狗寄養平台
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="cursor: pointer;background-color:#ededed;">
+                <button class="btn btn-link" style="cursor: pointer;">
+                    使用這個平台要付錢嗎?
+                </button>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                    我們可以肯定的跟你說「使用這個平台完全『免費』!!」。<br>
+                    (當然，寄養者與照顧者想有金錢上的交易，我們也認同)
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <hr>
+    <h3><span class="badge badge-secondary">商家廣告</span></h3>
+    <!-- 店家播放 -->
+    <div id="carouselT" class="carousel slide" data-ride="carousel" data-interval="3000">
+        <ol class="carousel-indicators">
+        <li data-target="#carouselT" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselT" data-slide-to="1"></li>
+        <li data-target="#carouselT" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="/static/images/petshop/shop1.jpg" alt="First slide">
+            <!-- 店家資訊 -->
+            <div class="carousel-caption d-none d-md-block">
+            <h5>狗王爺寵物店</h5>
+            <p>民生南路282號</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/static/images/petshop/shop2.jpg" alt="Second slide">
+            <div class="carousel-caption d-none d-md-block">
+            <!-- 店家資訊 -->
+            <h5>狗狗笑了寵物美容</h5>
+            <p>中正路282號</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/static/images/petshop/shop3.jpg" alt="Third slide">
+            <!-- 店家資訊 -->
+            <div class="carousel-caption d-none d-md-block">
+            <h5>飄飄然寵物美容</h5>
+            <p>南京路282號</p>
+            </div>
+        </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselT" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselT" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <h3><span class="badge badge-secondary">版權聲明</span></h3>
+    Icon designed by<br>
+    <div class="ml-4">
+        <a href="https://www.flaticon.com/authors/freepik">Freepik</a><br>
+        <a href="https://www.flaticon.com/authors/pixel-buddha">Pixel Buddha</a><br>
+        <a href="https://www.flaticon.com/authors/smashicons">Smashicons</a><br>
+        <a href="https://www.flaticon.com/authors/vectors-market">Vectors Market</a><br>
+        <a href="https://www.flaticon.com/authors/roundicons">Roundicons</a><br>
+    </div>
+    from Flaticon
+</div>
+
+{% endblock main %}
+
+
+{% block script %}
+{{ block.super }}
+
+
+{% endblock script %}

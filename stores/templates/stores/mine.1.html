@@ -1,0 +1,85 @@
+{% extends 'stores/base.html' %}
+
+{% block title %}我的 | {{ block.super }}{% endblock title %}
+
+{% block body %}
+{{ block.super }}
+<h2>我的</h2>
+
+<div class="table-responsive">
+    <form action="" method="post">
+    {% csrf_token %}
+    <table class="table table-bordered table-hover table-condensed">
+        <tr>
+            <th>照片</th>
+            <th>姓名</th>
+            <th>性別</th>
+            <th>電話</th>
+            <th>住區</th>
+            <th>住家環境</th>
+            <th>設施</th>
+            <th>評分</th>
+            <th>評價</th>
+            <!--th>加入日期</th-->
+            <th>修改</th>
+        </tr>
+        <tr>
+            <td> <img src='/media/{{ myuser.picture }}' width="80" alt="user_pictures"/> </td>
+            <td>  
+                {% if isEdit %}
+                    <input type="text" name="name" id="name" value="{{ myuser.name }}" size="1">
+                {% else %}
+                    {{ myuser.name }}
+                {% endif %}
+            </td>
+            <td> {{ myuser.gender }} </td>
+            <td> {{ myuser.phone_number }} </td>
+            <td> {{ myuser.residential_location }} </td>
+            <td> {{ myuser.housing_condition }} </td>
+            <td> {{ myuser.equipment }} </td>
+            <td> {{ myuser.score }} </td>
+            <td> {{ myuser.evaluation }} </td>
+            <!--td> {{ myuser.creation_date }} </td-->
+            <td> 
+                {% if isEdit %}
+                    <button type="submit" name="ok">完成</button>
+                {% else %}
+                    <button type="submit" name="edit">編輯</button>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+    </form>
+				
+
+</div class="table-responsive">
+<h4>我的狗</h4>
+    {% if myuser.dogs_set.all %}
+        <p>我有養{{ myuser.dogs_set.all|length }}隻狗</p>
+        <table class="table table-bordered table-hover table-condensed">
+            <tr>
+                <th>照片</th>
+                <th>狗名</th>
+                <th>性別</th>
+                <th>年齡</th>
+                <th>品種</th>
+                <th>性格</th>
+                <th>寄養</th>
+            </tr>
+
+        {% for dog in myuser.dogs_set.all %}
+            <tr>
+                <td> <img src='/media/{{ dog.picture }}' width="80" alt="dog_pictures"/> </td>
+                <td> {{ dog.name }} </td>
+                <td> {{ dog.gender }} </td>
+                <td> {{ dog.age }} </td>
+                <td> {{ dog.breed }} </td>
+                <td> {{ dog.character }} </td>
+                <td> {% if dog.is_foster %} 寄養中 {% else %} 在家 {% endif %} </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <p>你沒有養Dog呀~</p>
+    {% endif %}
+{% endblock body %}

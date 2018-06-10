@@ -1,0 +1,106 @@
+{% extends 'stores/base.html' %}
+
+{% block title %}使用者-設置 | {{ block.super }}{% endblock title %}
+
+{% block nav5 %}
+    <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <strong>使用者</strong>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'mine' %}">       資訊</a>
+            <a class="dropdown-item" href="{% url 'collection' %}"> 收藏</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'setting' %}">
+                <img src="/static/images/icon/settings.svg" width="20" height="20" class="d-inline-block align-top" alt="settings">
+                設置
+            </a>
+        </div>
+    </li>
+{% endblock nav5 %}
+
+
+{% block main %}
+{{ block.super }}
+<div class="introduce-bg2 introduce-mid">
+    <h1><span class="badge badge-secondary">使用者-設置</span></h1>
+    
+
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <td style="cursor: pointer;" onclick="location.href='/mine/'">
+                    <img src='/media/{{ myuser.picture }}' width="15%" alt="user_pictures"/>
+                    <b>{{ myuser.name }}</b>
+                    <p>查看個人資訊</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="cursor: pointer;">
+                    <img src='/static/images/icon/chat.svg' width="10%" alt="contract"/>
+                    寄養訊息
+                </td>
+            </tr>
+            <tr>
+                <td style="cursor: pointer;">
+                    <img src='/static/images/icon/console.svg' width="10%" alt="console"/>
+                    設備訊息
+                </td>
+            </tr>
+            <tr>
+                <td style="cursor: pointer;" data-toggle="modal" data-target="#emailModal">
+                    <img src='/static/images/icon/idea.svg' width="10%" alt="chat"/>
+                    提供意見
+                </td>
+            </tr>
+            <tr>
+                <td style="cursor: pointer;">
+                    <img src='/static/images/icon/donation.svg' width="10%" alt="donation"/>
+                    贊助我們
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <!--互動視窗-->
+    <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="https://formspree.io/a919233@yahoo.com.tw">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="你的E-mail">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">建議或反饋</label>
+                        <textarea class="form-control" id="message" name="message" placeholder="Your message" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Send</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock main %}
+
+
+{% block script %}
+{{ block.super }}
+<script type="text/javascript">
+
+</script>
+{% endblock script %}

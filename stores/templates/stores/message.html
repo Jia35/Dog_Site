@@ -1,0 +1,40 @@
+{% extends 'stores/base.html' %}
+
+{% block title %}消息 | {{ block.super }}{% endblock title %}
+
+
+{% block nav4 %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'message' %}"><strong>消息</strong></a>
+    </li>
+{% endblock nav4 %}
+
+
+{% block main %}
+{{ block.super }}
+<div class="introduce-bg2 introduce-mid">
+    <h1><span class="badge badge-secondary">消息</span></h1>
+    <!--h4><I>做不太出來...</I>😭😭😭</h4>
+    <img src="/static/images/dog02.jpg" width="400" alt="dog02.jpg"-->
+
+
+    {% for thisuser in chat_users %}
+        <div>
+            {{thisuser.name}}
+            <img src='/media/{{ thisuser.picture }}' height="60" alt="user_pictures" class="rounded-circle"/>
+            <button type="button" class="btn btn-info" onclick="location.href='/message_user/{{thisuser.account}}'">查看</button>
+            
+        </div>
+        <hr>
+
+    {% endfor %}
+
+
+</div>
+
+{% endblock main %}
+
+
+{% block script %}
+
+{% endblock script %}

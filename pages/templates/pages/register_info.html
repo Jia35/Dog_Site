@@ -1,0 +1,49 @@
+{% extends 'pages/base_log.html' %}
+
+{% block title %}填寫基本資料 | {{ block.super }}{% endblock title %}
+
+{% block body %}
+{{ block.super }}
+    <form action="" method="post" class="form-signin" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="text-center mb-4">
+            <h1 class="h3 mb-3 font-weight-normal">填寫基本資料</h1>
+            <p>請輸入正確的用戶資料</p>
+        </div>
+
+        <div class="form-label-group">
+            <input type="file" name="picture" id="picture" class="form-control" placeholder="照片">
+            <label for="picture">照片</label>
+        </div>
+        <div class="form-label-group">
+            <input type="text" name="name" id="name" class="form-control" placeholder="姓名" required="" value="{{name}}">
+            <label for="name">姓名</label>
+        </div>
+        <div class="form-label-group">
+            <select name="gender" id="gender" class="form-control" value="{{ myuser.gender }}" required="">
+                <option value="" selected disabled hidden>性別</option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+        </div>
+        <div class="form-label-group">
+            <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="電話" required="" value="{{phone_number}}">
+            <label for="phone_number">電話</label>
+        </div>
+        <div class="form-label-group">
+            <input type="text" name="residential_location" id="residential_location" class="form-control" placeholder="地區" required="" value="{{residential_location}}">
+            <label for="residential_location">地區</label>
+        </div>
+        <div class="form-label-group">
+            <input type="text" name="housing_condition" id="housing_condition" class="form-control" placeholder="住宅狀況" value="{{housing_condition}}">
+            <label for="housing_condition">住宅狀況</label>
+        </div>
+        <div class="form-label-group">
+            <input type="text" name="equipment" id="equipment" class="form-control" placeholder="可提供設施" value="{{equipment}}">
+            <label for="equipment">可提供設施</label>
+        </div>
+
+        <input type="hidden" name="ok" value="yes">        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">送出</button>
+    </form>
+{% endblock body %}
