@@ -23,57 +23,60 @@
 {{ block.super }}
 <div class="introduce-bg2 introduce-mid">
     <h1><span class="badge badge-secondary">使用者-資訊</span></h1>
-
+    <h4>我的資訊</h4>
     <div class="table-responsive">
         <form action="" method="post">
         {% csrf_token %}
         {% if isEdit %}
-            <button class="btn btn-info" type="submit" name="ok" style="width:10vw;">完成</button>
+            <button class="btn btn-info mb-1" type="submit" name="ok" style="width:10vw;">完成</button>
         {% else %}
-            <button class="btn btn-outline-info" type="submit" name="edit" style="width:10vw;">編輯</button>
+            <button class="btn btn-outline-info mb-1" type="submit" name="edit" style="width:10vw;">編輯</button>
         {% endif %}
         <div class="table-responsive">
             <table class="table table-bordered table-hover table-condensed">
-                <tr>
-                    <th>照片</th>
-                    <th>姓名</th>
-                    <th>性別</th>
-                    <th>電話</th>
-                    <th>住區</th>
-                    <th>住家環境</th>
-                    <th>設施</th>
-                    <th>評分</th>
-                    <th>評價</th>
-                    <!--th>加入日期</th-->
-                </tr>
-                <tr>
-                    <td> <img src='/media/{{ myuser.picture }}' width="70" alt="user_pictures"/> </td>
-                    
-                    {% if isEdit %}
-                        <td> <input type="text" name="name" value="{{ myuser.name }}" size="6"></td>
-                        <td> 
-                            <select name="gender" value="{{ myuser.gender }}" required="">
-                                <option value="" selected disabled hidden>請選擇性別...</option>
-                                <option value="男">男</option>
-                                <option value="女">女</option>
-                            </select>
-                        </td>
-                        <td> <input type="text" name="phone_number" value="{{ myuser.phone_number }}" size="8"></td>
-                        <td> <input type="text" name="residential_location" value="{{ myuser.residential_location }}" size="6"></td>
-                        <td> <input type="text" name="housing_condition" value="{{ myuser.housing_condition }}" size="1"></td>
-                        <td> <input type="text" name="equipment" value="{{ myuser.equipment }}" size="8"></td>
-                    {% else %}
-                        <td> {{ myuser.name }} </td>
-                        <td> {{ myuser.gender }} </td>
-                        <td> {{ myuser.phone_number }} </td>
-                        <td> {{ myuser.residential_location }} </td>
-                        <td> {{ myuser.housing_condition }} </td>
-                        <td> {{ myuser.equipment }} </td>
-                    {% endif %}
-                    <td> {{ myuser.score }} </td>
-                    <td> {{ myuser.evaluation }} </td>
-                    <!--td> {{ myuser.creation_date }} </td-->
-                </tr>
+                <thead style="background-color:#d8d8d8;">
+                    <tr>
+                        <th>照片</th>
+                        <th>姓名</th>
+                        <th>性別</th>
+                        <th>電話</th>
+                        <th>住區</th>
+                        <th>住家環境</th>
+                        <th>設施</th>
+                        <th>評分</th>
+                        <th>評價</th>
+                        <!--th>加入日期</th-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> <img src='/media/{{ myuser.picture }}' width="70" alt="user_pictures"/> </td>
+                        {% if isEdit %}
+                            <td> <input type="text" name="name" value="{{ myuser.name }}" size="6"></td>
+                            <td> 
+                                <select name="gender" value="{{ myuser.gender }}" required="">
+                                    <option value="" selected disabled hidden>請選擇性別...</option>
+                                    <option value="男">男</option>
+                                    <option value="女">女</option>
+                                </select>
+                            </td>
+                            <td> <input type="text" name="phone_number" value="{{ myuser.phone_number }}" size="8"></td>
+                            <td> <input type="text" name="residential_location" value="{{ myuser.residential_location }}" size="6"></td>
+                            <td> <input type="text" name="housing_condition" value="{{ myuser.housing_condition }}" size="1"></td>
+                            <td> <input type="text" name="equipment" value="{{ myuser.equipment }}" size="8"></td>
+                        {% else %}
+                            <td> {{ myuser.name }} </td>
+                            <td> {{ myuser.gender }} </td>
+                            <td> {{ myuser.phone_number }} </td>
+                            <td> {{ myuser.residential_location }} </td>
+                            <td> {{ myuser.housing_condition }} </td>
+                            <td> {{ myuser.equipment }} </td>
+                        {% endif %}
+                        <td> {{ myuser.score }} </td>
+                        <td> {{ myuser.evaluation }} </td>
+                        <!--td> {{ myuser.creation_date }} </td-->
+                    </tr>
+                </tbody>
             </table>
         </div>
         </form>
@@ -85,49 +88,52 @@
             <form action="" method="post">
             {% csrf_token %}
             {% if isdEdit %}
-                <button class="btn btn-info" type="submit" name="dok" style="width:10vw;">完成</button>
+                <button class="btn btn-info mb-1" type="submit" name="dok" style="width:10vw;">完成</button>
             {% else %}
-                <button class="btn btn-outline-info" type="submit" name="dedit" style="width:10vw;">編輯</button>
+                <button class="btn btn-outline-info mb-1" type="submit" name="dedit" style="width:10vw;">編輯</button>
             {% endif %}
             <div class="table-responsive">
                 <table class="table table-bordered table-hover table-condensed">
-                    <tr>
-                        <th>照片</th>
-                        <th>狗名</th>
-                        <th>性別</th>
-                        <th>年齡</th>
-                        <th>品種</th>
-                        <th>性格</th>
-                        <th>寄養</th>
-                    </tr>
-                {% for dog in myuser.dogs_set.all %}
-                    <tr>
-                        <td> <img src='/media/{{ dog.picture }}' width="70" alt="dog_pictures" required=""/> </td>
-                        
-                        {% if isdEdit %}
-                            <td> <input type="text" name="dname[]" value="{{ dog.name }}" size="6" required=""></td>
-                            <!--td> <input type="text" name="dgender[]" value="{{ dog.gender }}" size="1"></td-->
-                            <td> 
-                                <select name="dgender[]" value="{{ dog.gender }}" required="">
-                                    <option value="" selected disabled hidden>請選擇性別...</option>
-                                    <option value="公">公</option>
-                                    <option value="母">母</option>
-                                </select>
-                            </td>
-                            <td> <input type="text" name="dage[]" value="{{ dog.age }}" size="1" required=""></td>
-                            <td> <input type="text" name="dbreed[]" value="{{ dog.breed }}" size="5" required=""></td>
-                            <td> <input type="text" name="dcharacter[]" value="{{ dog.character }}" size="8" required=""></td>
-                        {% else %}
-                            <td> {{ dog.name }} </td>
-                            <td> {{ dog.gender }} </td>
-                            <td> {{ dog.age }} </td>
-                            <td> {{ dog.breed }} </td>
-                            <td> {{ dog.character }} </td>
-                        {% endif %}
-                        
-                        <td> {% if dog.is_foster %} 寄養中 {% else %} 在家 {% endif %} </td>
-                    </tr>
-                {% endfor %}
+                    <thead style="background-color:#d8d8d8;">
+                        <tr>
+                            <th>照片</th>
+                            <th>狗名</th>
+                            <th>性別</th>
+                            <th>年齡</th>
+                            <th>品種</th>
+                            <th>性格</th>
+                            <th>寄養</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for dog in myuser.dogs_set.all %}
+                        <tr>
+                            <td> <img src='/media/{{ dog.picture }}' width="70" alt="dog_pictures" required=""/> </td>
+                            {% if isdEdit %}
+                                <td> <input type="text" name="dname[]" value="{{ dog.name }}" size="6" required=""></td>
+                                <!--td> <input type="text" name="dgender[]" value="{{ dog.gender }}" size="1"></td-->
+                                <td> 
+                                    <select name="dgender[]" value="{{ dog.gender }}" required="">
+                                        <option value="" selected disabled hidden>請選擇性別...</option>
+                                        <option value="公">公</option>
+                                        <option value="母">母</option>
+                                    </select>
+                                </td>
+                                <td> <input type="text" name="dage[]" value="{{ dog.age }}" size="1" required=""></td>
+                                <td> <input type="text" name="dbreed[]" value="{{ dog.breed }}" size="5" required=""></td>
+                                <td> <input type="text" name="dcharacter[]" value="{{ dog.character }}" size="8" required=""></td>
+                            {% else %}
+                                <td> {{ dog.name }} </td>
+                                <td> {{ dog.gender }} </td>
+                                <td> {{ dog.age }} </td>
+                                <td> {{ dog.breed }} </td>
+                                <td> {{ dog.character }} </td>
+                            {% endif %}
+                            
+                            <td> {% if dog.is_foster %} 寄養中 {% else %} 在家 {% endif %} </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
                 </table>
             </div>
             </form>

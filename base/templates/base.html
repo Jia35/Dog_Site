@@ -10,21 +10,9 @@
     <meta name="X-UA-Compatible" content="IE=edge">
     <title>{% block title %}狗狗寄養平台{% endblock title %}</title>
 
-	<!--link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-	<link rel="stylesheet" href="/static/css/jqm-demos.css">
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="/static/js/index_JS.js"></script>
-    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script-->
-    
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-
-    <!-- 匯入自己的css >
-    <link rel="stylesheet" href="custom.css"-->
     
-    <!--https://www.minwt.com/webdesign-dev/css/2094.html
-    https://wcc723.github.io/sass/2014/02/21/font-code-range/-->
     <style>
     body {
         font-family:"MS Sans Serif", "微軟正黑體", "新細明體", "細明體" ;
@@ -119,12 +107,12 @@
             {% endblock nav5 %}
         </ul>
 
-
         <form class="form-inline my-2 my-lg-0">
-        <a class="text-dark">標題搜尋：</a>
+        <label for="myPopover">標題搜尋：</label>
         <input type="search" id="myPopover" class="form-control mr-sm-2 light-table-filter" data-table="order-table" data-toggle="popover" 
         title="搜尋結果" data-html="true" data-placement="bottom" data-content="" placeholder="請輸入關鍵字">
         <!--button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜尋</button-->
+        
         {% if request.user.is_authenticated %}
             <a href="/accounts/logout/" data-ajax="false" class="mr-sm-3">登出 {{ request.user.username }}</a>
         {% else %}

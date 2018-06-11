@@ -21,26 +21,34 @@
         {% for message in messages %}
             {% if message.account == account %}
                 <div class="row justify-content-end">
-                    <div class="col-4 text-muted text-right">
-                        {{message.timestamp}}
+                    <div class="col-">
+                        ：{{message.name}}
                     </div>
-                    <div class="col-4 rounded text-right" style="background-color:#d8d8d8;">
+                </div>
+                <div class="row justify-content-end">
+                    <div class="col- rounded text-right" style="background-color:#d8d8d8;">
                         {{message.text}}
                     </div>
-                    <div class="col-2">
-                        ：{{message.name}}
+                </div>
+                <div class="row justify-content-end">
+                    <div class="col- text-muted text-right">
+                        {{message.timestamp}}
                     </div>
                 </div>
                 <hr>
             {% else %}
                 <div class="row justify-content-start">
-                    <div class="col-2">
+                    <div class="col-">
                         {{message.name}}：
                     </div>
-                    <div class="col-4 rounded" style="background-color:#d8d8d8;">
+                </div>
+                <div class="row justify-content-start">
+                    <div class="col- rounded text-right" style="background-color:#d8d8d8;">
                         {{message.text}}
                     </div>
-                    <div class="col-4 text-muted">
+                </div>
+                <div class="row justify-content-start">
+                    <div class="col- text-muted text-right">
                         {{message.timestamp}}
                     </div>
                 </div>

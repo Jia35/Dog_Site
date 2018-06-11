@@ -26,25 +26,49 @@
     <h1><span class="badge badge-secondary">使用者-收藏</span></h1>
     <h4>我有{{ allusers|length }}位收藏</h4>
 
-    <div class="card-columns">
+    <div class="container">
+        <!--div class="row mid ">
         {% for user in allusers %}
-        <div class="card border-info" style="width: 20vw;">
-            <div class="card-body">
-                <h3 class="card-title"><b>{{ user.name }}</b></h3>
-                <div class="text-center">
-                    <img class="card-img" src='/media/{{user.picture}}' width="80" alt="user_pictures"/>
-                    <p>{{ user.residential_location }}</p>
+        <div class="col-4">
+            <div class="card border-info" style="width: 20vw;">
+                <div class="card-body">
+                    <h3 class="card-title"><b>{{ user.name }}</b></h3>
+                    <div class="text-center">
+                        <img class="card-img" src='/media/{{user.picture}}' width="80" alt="user_pictures"/>
+                        <p>{{ user.residential_location }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card-footer text-center" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal" data-whatever="{{ user.account }}">
-                <button class="btn btn-link" style="cursor: pointer;">
-                    <h5>查看</h5>
-                </button>
+                <div class="card-footer text-center" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal" data-whatever="{{ user.account }}">
+                    <button class="btn btn-link" style="cursor: pointer;">
+                        <h5>查看</h5>
+                    </button>
+                </div>
             </div>
         </div>
         {% endfor %}
-    </div>
+        </div-->
+        <div class="row">
+        {% for user in allusers %}
+        <div class="col-4">
+            <div class="card border-info" style="width: 20vw;">
+                <div class="card-body">
+                    <h3 class="card-title"><b>{{ user.name }}</b></h3>
+                    <div class="text-center">
+                        <img class="card-img" src='/media/{{user.picture}}' width="80" alt="user_pictures"/>
+                        <p>{{ user.residential_location }}</p>
+                    </div>
+                </div>
+                <div class="card-footer text-center" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal" data-whatever="{{ user.account }}">
+                    <button class="btn btn-link" style="cursor: pointer;">
+                        <h5>查看</h5>
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
 
+    </div>
 
 
 

@@ -25,52 +25,102 @@
 <div class="introduce-bg2 introduce-mid">
     <h1><span class="badge badge-secondary">使用者-設置</span></h1>
     
-
     <table class="table table-hover">
         <tbody>
             <tr>
                 <td style="cursor: pointer;" onclick="location.href='/mine/'">
-                    <img src='/media/{{ myuser.picture }}' width="15%" alt="user_pictures"/>
-                    <b>{{ myuser.name }}</b>
-                    <p>查看個人資訊</p>
+                    <div class="row align-items-end">
+                        <div class="col-2">
+                            <img src='/media/{{ myuser.picture }}' width="80%" alt="user_pictures"/>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <b>{{ myuser.name }}</b>
+                            </div>
+                            <div class="row">
+                                <p>查看個人資訊</p>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
             <tr>
-                <td style="cursor: pointer;">
+                <td style="cursor: pointer;" data-toggle="modal" data-target="#fosterModal">
                     <img src='/static/images/icon/chat.svg' width="10%" alt="contract"/>
-                    寄養訊息
+                    <span class="pl-2">寄養訊息</span>
                 </td>
             </tr>
             <tr>
-                <td style="cursor: pointer;">
+                <td style="cursor: pointer;" data-toggle="modal" data-target="#deviceModal">
                     <img src='/static/images/icon/console.svg' width="10%" alt="console"/>
-                    設備訊息
+                    <span class="pl-2">設備訊息</span>
                 </td>
             </tr>
             <tr>
                 <td style="cursor: pointer;" data-toggle="modal" data-target="#emailModal">
                     <img src='/static/images/icon/idea.svg' width="10%" alt="chat"/>
-                    提供意見
+                    <span class="pl-2">提供意見</span>
                 </td>
             </tr>
             <tr>
-                <td style="cursor: pointer;">
+                <td style="cursor: pointer;" data-toggle="modal" data-target="#donationModal">
                     <img src='/static/images/icon/donation.svg' width="10%" alt="donation"/>
-                    贊助我們
+                    <span class="pl-2">贊助我們</span>
                 </td>
             </tr>
         </tbody>
     </table>
 
 
-
-    <!--互動視窗-->
-    <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!--互動視窗 寄養訊息-->
+    <div class="modal fade" id="fosterModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    <h4 class="modal-title" id="exampleModalLabel">寄養訊息</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>寄養訊息</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--互動視窗 設備訊息-->
+    <div class="modal fade" id="deviceModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">設備訊息</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>設備訊息</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--互動視窗 提供意見-->
+    <div class="modal fade" id="emailModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">提供意見</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <form method="POST" action="https://formspree.io/a919233@yahoo.com.tw">
                 <div class="modal-body">
@@ -80,11 +130,11 @@
                     </div>
                     <div class="form-group">
                         <label for="message">建議或反饋</label>
-                        <textarea class="form-control" id="message" name="message" placeholder="Your message" rows="3"></textarea>
+                        <textarea class="form-control" id="message" name="message" placeholder="意見或反饋..." rows="3"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Send</button>
+                    <button type="submit" class="btn btn-success">寄出</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                 </div>
                 </form>
@@ -92,6 +142,28 @@
         </div>
     </div>
 
+    <!--互動視窗 提供意見-->
+    <div class="modal fade" id="donationModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">贊助我們</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><b>匯款資訊</b></p>
+                    <p class="pl-3">銀 行： 700 中華郵政</p>
+                    <p class="pl-3">帳 號： 0123456-0123456</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
 </div>
 

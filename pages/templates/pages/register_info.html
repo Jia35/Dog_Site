@@ -4,7 +4,7 @@
 
 {% block body %}
 {{ block.super }}
-    <form action="" method="post" class="form-signin" enctype="multipart/form-data">
+    <form action="" method="post" class="form-signin was-validated" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="text-center mb-4">
             <h1 class="h3 mb-3 font-weight-normal">填寫基本資料</h1>

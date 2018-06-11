@@ -51,6 +51,7 @@ def foster(request):
 def message(request):
     username = request.user.username
     myuser = Alluser.objects.get(account=username)
+    message = Message.objects.order_by('-timestamp')[0]
 
     chat_userss = myuser.chat_user.split(',');
     chat_users = []
