@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from stores.models import Alluser, Dogs, GPSs, Message
+from django.forms.models import model_to_dict
 
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
@@ -7,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 import time
+import datetime
 
 
 @login_required
@@ -31,13 +33,25 @@ def home(request):
 
 @login_required
 def foster(request):
+    username = request.user.username
+    myuser = Alluser.objects.get(account=username)
+    collection_users = myuser.collection_user.split(',');
+    
     if 'searchUser' in request.POST:
         searchUser = request.POST['searchUser']
         alluser = Alluser.objects.filter(name__icontains=searchUser)
-        
     else:
         alluser = Alluser.objects.all()
         alldog = Dogs.objects.all()
+
+    if 'collection' in request.POST:
+        collection_name = request.POST['collection']
+        if collection_name in collection_users:
+            collection_users.remove(collection_name)
+            myuser.collection_user = ",".join(collection_users)
+        else:
+            myuser.collection_user = myuser.collection_user + "," + collection_name
+        myuser.save()
 
     allusers = alluser.values()    #_list
     allusers = json.dumps(list(allusers), cls=DjangoJSONEncoder)
@@ -51,8 +65,10 @@ def foster(request):
 def message(request):
     username = request.user.username
     myuser = Alluser.objects.get(account=username)
-    message = Message.objects.order_by('-timestamp')[0]
-
+    message = Message.objects.order_by('-timestamp').values()[0]
+    
+    m = json.dumps(message, cls=DjangoJSONEncoder)
+    
     chat_userss = myuser.chat_user.split(',');
     chat_users = []
     for account in chat_userss:
@@ -135,14 +151,22 @@ def mine(request):
 def collection(request):
     username = request.user.username
     myuser = Alluser.objects.get(account=username)
-
+    
     collection_users = myuser.collection_user.split(',');
+
+    if 'collection' in request.POST:
+        collection_name = request.POST['collection']
+        if collection_name in collection_users:
+            collection_users.remove(collection_name)
+            myuser.collection_user = ",".join(collection_users)
+        else:
+            myuser.collection_user = myuser.collection_user + "," + collection_name
+        myuser.save()
     
     allusers = []
     for account in collection_users:
         oneuser = Alluser.objects.get(account=account)
         allusers.append(oneuser)
-
 
     alluser2 = Alluser.objects.all()
     alldog2 = Dogs.objects.all()

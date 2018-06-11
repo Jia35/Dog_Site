@@ -109,3 +109,13 @@ def register_info_dog(request):
         d.save()
         return render(request, 'stores/mine.html', locals())
     return render(request, 'pages/register_info_dog.html', locals())
+
+
+def reservation(request,id):
+    username = request.user.username
+    myuser = Alluser.objects.get(account=username)
+    
+    whouser = Alluser.objects.get(account=id)
+
+    
+    return render(request, 'pages/reservation.html', locals())

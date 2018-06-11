@@ -52,18 +52,21 @@
                     <tr>
                         <td> <img src='/media/{{ myuser.picture }}' width="70" alt="user_pictures"/> </td>
                         {% if isEdit %}
-                            <td> <input type="text" name="name" value="{{ myuser.name }}" size="6"></td>
+                            <td> <input class="form-control" type="text" name="name" value="{{ myuser.name }}" size="6"></td>
                             <td> 
-                                <select name="gender" value="{{ myuser.gender }}" required="">
-                                    <option value="" selected disabled hidden>請選擇性別...</option>
-                                    <option value="男">男</option>
-                                    <option value="女">女</option>
+                                <select class="custom-select" name="gender" value="{{ myuser.gender }}" required="">
+                                    <option value="{{myuser.gender}}" selected>{{myuser.gender}}</option>
+                                    {% if myuser.gender == "男" %}
+                                        <option value="女">女</option>
+                                    {% else %}
+                                        <option value="男">男</option>
+                                    {% endif %}
                                 </select>
                             </td>
-                            <td> <input type="text" name="phone_number" value="{{ myuser.phone_number }}" size="8"></td>
-                            <td> <input type="text" name="residential_location" value="{{ myuser.residential_location }}" size="6"></td>
-                            <td> <input type="text" name="housing_condition" value="{{ myuser.housing_condition }}" size="1"></td>
-                            <td> <input type="text" name="equipment" value="{{ myuser.equipment }}" size="8"></td>
+                            <td> <input class="form-control" type="text" name="phone_number" value="{{ myuser.phone_number }}" size="8"></td>
+                            <td> <input class="form-control" type="text" name="residential_location" value="{{ myuser.residential_location }}" size="6"></td>
+                            <td> <input class="form-control" type="text" name="housing_condition" value="{{ myuser.housing_condition }}" size="1"></td>
+                            <td> <input class="form-control" type="text" name="equipment" value="{{ myuser.equipment }}" size="8"></td>
                         {% else %}
                             <td> {{ myuser.name }} </td>
                             <td> {{ myuser.gender }} </td>
@@ -110,18 +113,21 @@
                         <tr>
                             <td> <img src='/media/{{ dog.picture }}' width="70" alt="dog_pictures" required=""/> </td>
                             {% if isdEdit %}
-                                <td> <input type="text" name="dname[]" value="{{ dog.name }}" size="6" required=""></td>
+                                <td> <input class="form-control" type="text" name="dname[]" value="{{ dog.name }}" size="6" required=""></td>
                                 <!--td> <input type="text" name="dgender[]" value="{{ dog.gender }}" size="1"></td-->
                                 <td> 
-                                    <select name="dgender[]" value="{{ dog.gender }}" required="">
-                                        <option value="" selected disabled hidden>請選擇性別...</option>
-                                        <option value="公">公</option>
-                                        <option value="母">母</option>
+                                    <select class="custom-select" name="dgender[]" value="{{ dog.gender }}" required="">
+                                        <option value="{{dog.gender}}" selected>{{dog.gender}}</option>
+                                        {% if myuser.gender == "公" %}
+                                            <option value="母">母</option>
+                                        {% else %}
+                                            <option value="公">公</option>
+                                        {% endif %}
                                     </select>
                                 </td>
-                                <td> <input type="text" name="dage[]" value="{{ dog.age }}" size="1" required=""></td>
-                                <td> <input type="text" name="dbreed[]" value="{{ dog.breed }}" size="5" required=""></td>
-                                <td> <input type="text" name="dcharacter[]" value="{{ dog.character }}" size="8" required=""></td>
+                                <td> <input class="form-control" type="text" name="dage[]" value="{{ dog.age }}" size="1" required=""></td>
+                                <td> <input class="form-control" type="text" name="dbreed[]" value="{{ dog.breed }}" size="5" required=""></td>
+                                <td> <input class="form-control" type="text" name="dcharacter[]" value="{{ dog.character }}" size="8" required=""></td>
                             {% else %}
                                 <td> {{ dog.name }} </td>
                                 <td> {{ dog.gender }} </td>

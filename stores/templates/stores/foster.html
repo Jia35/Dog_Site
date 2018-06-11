@@ -22,13 +22,11 @@
 
     <h3>用戶列表</h3>
     <p>點擊可查看詳細資訊</p>
-    <!--form action="" method="post">
-    {% csrf_token %}
-        <input type="text" name="searchUser" value="" size="3">
-        <button type="submit" name="searchButton">搜尋</button>
-    </form-->
+    
+    <input type="search" class="form-control light-table-filter mb-2" data-table="order-table" 
+         data-placement="bottom" placeholder="請輸入關鍵字過濾...">
 
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover order-table">
         <thead style="background-color:#d8d8d8;">
             <tr>
             <th>照片</th>
@@ -45,7 +43,7 @@
         </thead>
         <tbody>
             {% for user in alluser %}
-            <tr style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal" data-whatever="{{ user.account }}">
+            <tr style="cursor: pointer;" data-toggle="modal" data-target="#userModal" data-whatever="{{ user.account }}">
                 <td> <img src='/media/{{ user.picture }}' width="80" alt="user_pictures"/> </td>
                 <td> {{ user.name }} </td>
                 <td> {{ user.gender }} </td>
@@ -59,145 +57,10 @@
             {% endfor %} 
         </tbody>
     </table>
+</div>
 
-
-    <!--互動視窗-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">個人資訊</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <img id="html_dpicture" src="" class="rounded mx-auto d-block introduce-mid" alt="No dogs">
-				<br>
-				<div class="row no-gutters introduce-mid">
-					<!-- 使用者資料 -->
-					<div class="col-sm-8">
-						<div class="row introduce-mid">
-							<h3 id="html_name">茂伯</h3>
-						</div>
-						<div class="row introduce-mid">
-							<p id="html_gender">男性-已婚</p>
-						</div>
-						<div class="row introduce-mid">
-							<p id="html_residential_location">雲林縣虎尾鎮建成路</p>
-						</div>
-					</div>
-					<div class="col-sm-4">
-                        <img id="html_picture" src=""  class="rounded-circle mx-auto d-block introduce-mid" alt="Responsive image">
-                        <input type="hidden" name="ok" value="yes">        
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">送出</button>
-                    </div>
-				</div>
-                <hr>
-                
-				<div class="row no-gutters introduce-mid">
-					<!-- 狗狗簡介 -->
-					<div class="col-sm-6">
-						<div class="row introduce-mid">
-							<div class="col-sm-4">
-								<img src="/static/images/icon/plain-dog.png"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
-							</div>
-							<div class="col-sm-6">
-								<span id="html_dbreed" class="align-middle">小鬥犬</span>
-							</div>
-						</div>
-						
-						<div class="row introduce-mid">
-							<div class="col-sm-4">
-								<img src="/static/images/icon/flash.png"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
-							</div>
-							<div class="col-sm-6">
-								<span id="html_dcharacter" class="align-middle">溫和</span>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-sm-6">
-						<div class="row  introduce-mid">
-							<div class="col-sm-4">
-								<img src="/static/images/icon/age.svg"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
-							</div>
-							<div class="col-sm-6">
-								<span id="html_dage" class="align-middle">3 歲</span>
-							</div>
-						</div>
-						
-						<div class="row introduce-mid">
-							<div class="col-sm-4">
-								<img src="/static/images/icon/res.png"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
-							</div>
-							<div class="col-sm-6">
-								<span id="html_dfavorite_food" class="align-middle">高麗菜</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<hr>
-				
-				<div class="row no-gutters introduce-mid">
-					<div class="row no-gutters introduce-mid">
-						<p id="html_introduce">茂伯曾榮獲金馬獎，並且擔任遛狗理事會的理事長。為人大方並富有鄉土味，是台灣土狗代遛的最佳人選。</p>
-					</div>
-				</div>
-                <hr>
-                
-				<div class="row no-gutters introduce-mid">
-					<div class="row no-gutters introduce-mid">
-						<p><i>這裏面放遛狗的GPS路徑圖</i></p>
-					</div>
-				</div>
-				<hr>
-				
-				<div class="row no-gutters introduce-mid">
-					<div class="col-sm-10">
-						<p>可預定日期</p>
-					</div>
-					<div class="col-sm-2">
-                        <a href="" class="btn btn-outline-success my-2 my-sm-0">查看</a>
-					</div>
-				</div>
-                <hr>
-                
-                <div class="row no-gutters introduce-mid">
-                    <div class="col-sm-10">
-                        <p>聯絡狗狗的主人</p>
-                    </div>
-                    <div class="col-sm-2">
-                        <a href="" class="btn btn-outline-success my-2 my-sm-0">聯絡</a>
-                    </div>
-                </div>
-                <hr>
-
-                <div class="row no-gutters introduce-mid">
-                    <div class="col-sm-10">
-                        <p>寄養規則</p>
-                    </div>
-                    <div class="col-sm-2">
-                        <a href="" class="btn btn-outline-success my-2 my-sm-0">立即預定</a>
-                    </div>
-                </div>
-                <hr>
-				
-				<div class="row no-gutters introduce-mid">
-					<div class="col-sm-10">
-						<p id="html_residential_location1">632雲林縣虎尾鎮建成路</p>
-					</div>
-					<div class="col-sm-2">
-						<a href="" class="btn btn-lg btn-warning">立即預定</a>
-					</div>
-				</div>
-
-
-            </div>
-            
-        </div>
-    </div>
-    </div>
+<!--互動視窗 個人資訊-->
+{% include 'stores/user_modal.html' %}
 
 {% endblock main %}
 
@@ -207,8 +70,9 @@
 <script type="text/javascript">
     var allusers = {{allusers|safe}};
     var alldogs = {{alldogs|safe}};
-    
-    $('#exampleModal').on('show.bs.modal', function (event) {
+    var collection_users = {{collection_users|safe}};
+
+    $('#userModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)     // Button that triggered the modal
         var recipient = button.data('whatever') // Extract info from data-* attributes
         var modal = $(this)
@@ -219,7 +83,18 @@
         var clickDog = alldogs.find(function(item, index, array){
             return item.master_id == clickUser.id;
         });
+        
+        if (collection_users.indexOf(clickUser.account) == -1){
+            modal.find('#html_collection_text').text("加入收藏")
+            document.getElementById('html_collection_img').src = "/static/images/icon/star0.png";
+        }
+        else{
+            modal.find('#html_collection_text').text("取消收藏")
+            document.getElementById('html_collection_img').src = "/static/images/icon/star1.png";
+        }
+        
         modal.find('#html_name').text(clickUser.name)
+        document.getElementById('html_name1').value = clickUser.account;
         //$("#html_picture").attr("src","/media/" + clickUser.picture); 
         document.getElementById('html_picture').src = "/media/" + clickUser.picture;
         modal.find('#html_gender').text(clickUser.gender)
@@ -231,7 +106,9 @@
         modal.find('#html_score').text(clickUser.score)
         modal.find('#html_evaluation').text(clickUser.evaluation)
         modal.find('#html_introduce').text(clickUser.introduce)
+        document.getElementById('html_reservation').href = "/reservation/" + clickUser.account;
 
+        
         if (clickDog){
             modal.find('#html_dbreed').text(clickDog.breed)
             document.getElementById('html_dpicture').src = "/media/" + clickDog.picture;
@@ -247,10 +124,53 @@
             modal.find('#html_dage').text("沒養狗")
             modal.find('#html_dfavorite_food').text("沒養狗")
         }
-        //console.log(clickUser)
-        //console.log(clickDog)
     })
+</script>
 
+<script type="text/javascript">
+    (function(document) {
+        'use strict';
+      
+        // 建立 LightTableFilter
+        var LightTableFilter = (function(Arr) {
+            var _input;
+      
+            // 資料輸入事件處理函數
+            function _onInputEvent(e) {
+                _input = e.target;
+                var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+                Arr.forEach.call(tables, function(table) {
+                    Arr.forEach.call(table.tBodies, function(tbody) {
+                        Arr.forEach.call(tbody.rows, _filter);
+                    });
+                });
+            }
+        
+            // 資料篩選函數，顯示包含關鍵字的列，其餘隱藏
+            function _filter(row) {
+                var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+                row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+            }
+      
+            return {
+                // 初始化函數
+                init: function() {
+                    var inputs = document.getElementsByClassName('light-table-filter');
+                    Arr.forEach.call(inputs, function(input) {
+                        input.oninput = _onInputEvent;
+                    });
+                }
+            };
+        })(Array.prototype);
+      
+        // 網頁載入完成後，啟動 LightTableFilter
+        document.addEventListener('readystatechange', function() {
+            if (document.readyState === 'complete') {
+                LightTableFilter.init();
+            }
+        });
+      
+    })(document);
 </script>
 
 {% endblock script %}

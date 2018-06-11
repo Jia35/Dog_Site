@@ -14,8 +14,7 @@
 {{ block.super }}
 <div class="introduce-bg2 introduce-mid">
     <h1><span class="badge badge-secondary">消息</span></h1>
-    <!--h4><I>做不太出來...</I>😭😭😭</h4>
-    <img src="/static/images/dog02.jpg" width="400" alt="dog02.jpg"-->
+    <!--h4><I>做不太出來...</I>😭😭😭</h4-->
 
     <div class="container">
         
@@ -24,12 +23,17 @@
             <tr style="cursor: pointer;">
                 <td>
                     <div class="row align-items-center" onclick="location.href='/message_user/{{thisuser.account}}'">
-                        <div class="col-1">
+                        <div class="col-2">
                             <img src='/media/{{ thisuser.picture }}' width="100%" alt="user_pictures" class="rounded-circle"/>
                         </div>
                         <div class="col">
                             <div class="row">
-                                <b>{{thisuser.name}}</b>
+                                <div class="col p-0">
+                                    <h5><b>{{thisuser.name}}</b></h5>
+                                </div>
+                                <div class="col text-right">
+                                    <small class="html_datetime text-muted">123分 前</small>
+                                </div>
                             </div>
                             <div class="row">
                                 {{message.text}}
@@ -41,26 +45,6 @@
             {% endfor %}
         </table>
 
-
-    <!--{% for thisuser in chat_users %}
-        <div>
-            <div class="row align-items-center" onclick="location.href='/message_user/{{thisuser.account}}'">
-                <div class="col-1">
-                    <img src='/media/{{ thisuser.picture }}' width="100%" alt="user_pictures" class="rounded-circle"/>
-                </div>
-                <div class="col">
-                    <div class="row">
-                        <b>{{thisuser.name}}</b>
-                    </div>
-                    <div class="row">
-                        {{message.text}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-
-    {% endfor %}-->
     </div>
 
 </div>
@@ -69,5 +53,35 @@
 
 
 {% block script %}
+<script type="text/javascript">
+    var a = {{m|safe}};
+    var t = a.timestamp
+
+    var Date_A = new Date(t.slice(0,4),t.slice(5,7),t.slice(8,10),t.slice(11,13),t.slice(14,16),t.slice(17,19));  
+    var Date_B = new Date();
+    var Date_BB = new Date(Date_B.getFullYear(),Date_B.getMonth()+1,Date_B.getDate(),Date_B.getHours(),Date_B.getMinutes(),Date_B.getSeconds());
+    var Date_C = new Date(Date_BB - Date_A);
+
+    var days=Math.floor(Date_C/(24*3600*1000))
+
+    var leave1=Date_C%(24*3600*1000)
+    var hours=Math.floor(leave1/(3600*1000))
+
+    var leave2=leave1%(3600*1000)
+    var minutes=Math.floor(leave2/(60*1000))
+
+    var leave3=leave2%(60*1000)
+    var seconds=Math.round(leave3/1000)
+    
+    console.log(days + "天 " + hours + "小時 " + minutes + "分 " + seconds + "秒")
+    
+    var datetime_text = days + "天" + hours + "小時" + minutes + "分" + seconds + "秒 前";
+    
+    $(".html_datetime").ready(function(){
+        $(".html_datetime").text(datetime_text);
+    });
+
+
+</script>
 
 {% endblock script %}

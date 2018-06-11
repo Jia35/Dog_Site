@@ -19,8 +19,8 @@ from django.urls import path, re_path
 from django.conf.urls.static import static
 from django.conf import settings
 
+from pages.views import about, login, logout, register, register_info, register_info_dog, reservation
 from stores.views import home, foster, mine, message, message_user, collection, setting, user_info, getGPS
-from pages.views import about, login, logout, register, register_info, register_info_dog
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -40,7 +40,8 @@ urlpatterns = [
     path('accounts/register/', register, name='register'),
     path('register_info/', register_info, name='register_info'),
     path('register_info_dog/', register_info_dog, name='register_info_dog'),
-
+    re_path(r'^reservation/([a-zA-Z0-9]{1,150})/$', reservation, name='reservation'),
+    
     path('getGPS/', getGPS),
 
 ]

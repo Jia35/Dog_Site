@@ -57,4 +57,4 @@ class Message(models.Model):
     account = models.CharField(max_length=30)
     name = models.CharField(max_length=20)
     text = models.CharField(max_length=255)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(default = timezone.now)

@@ -1,0 +1,192 @@
+<!--互動視窗 個人資訊-->
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userModalLabel">個人資訊</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="html_dpicture" src="" class="rounded mx-auto d-block introduce-mid" alt="No dogs">
+                <br>
+                <div class="row no-gutters introduce-mid">
+                    <!-- 使用者資料 -->
+                    <div class="col-sm-8">
+                        <div class="introduce-mid">
+                            <div class="row justify-content-between">
+                                <div class="col">
+                                    <h3 id="html_name">茂伯</h3>
+                                </div>
+                                <div class="col">
+                                    <form action="" method="post" name="collection_form">
+                                    {% csrf_token %}
+                                        <input type="hidden" id="html_name1" name="collection" value="">        
+                                        <div onClick="document.collection_form.submit();" style="cursor: pointer;">
+                                            <img id="html_collection_img" src='/static/images/icon/star0.png' width="20%" alt="star1" onclick="location.href='/mine/'"/>
+                                            <span id="html_collection_text">收藏</span>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                        <div class="row introduce-mid">
+                            <p id="html_gender">男性-已婚</p>
+                        </div>
+                        <div class="row introduce-mid">
+                            <p id="html_residential_location">雲林縣虎尾鎮建成路</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <img id="html_picture" src=""  class="rounded-circle mx-auto d-block introduce-mid" alt="Responsive image">
+                    </div>
+                </div>
+                <hr>
+                
+                <div class="row no-gutters introduce-mid">
+                    <!-- 狗狗簡介 -->
+                    <div class="col-sm-6">
+                        <div class="row introduce-mid">
+                            <div class="col-sm-4">
+                                <img src="/static/images/icon/plain-dog.png"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
+                            </div>
+                            <div class="col-sm-6">
+                                <span id="html_dbreed" class="align-middle">小鬥犬</span>
+                            </div>
+                        </div>
+                        
+                        <div class="row introduce-mid">
+                            <div class="col-sm-4">
+                                <img src="/static/images/icon/flash.png"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
+                            </div>
+                            <div class="col-sm-6">
+                                <span id="html_dcharacter" class="align-middle">溫和</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-6">
+                        <div class="row  introduce-mid">
+                            <div class="col-sm-4">
+                                <img src="/static/images/icon/age.svg"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
+                            </div>
+                            <div class="col-sm-6">
+                                <span id="html_dage" class="align-middle">3 歲</span>
+                            </div>
+                        </div>
+                        
+                        <div class="row introduce-mid">
+                            <div class="col-sm-4">
+                                <img src="/static/images/icon/res.png"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
+                            </div>
+                            <div class="col-sm-6">
+                                <span id="html_dfavorite_food" class="align-middle">高麗菜</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                
+                <div class="row no-gutters introduce-mid">
+                    <div class="row no-gutters introduce-mid">
+                        <p id="html_introduce">茂伯曾榮獲金馬獎，並且擔任遛狗理事會的理事長。
+                            為人大方並富有鄉土味，是台灣土狗代遛的最佳人選。</p>
+                    </div>
+                </div>
+                <hr>
+                
+                <div class="row no-gutters introduce-mid">
+                    <div class="row no-gutters introduce-mid">
+                        <p><i>這裏面放遛狗的GPS路徑圖</i></p>
+                    </div>
+                </div>
+                <hr>
+                
+                <div class="row no-gutters introduce-mid">
+                    <div class="col-sm-10">
+                        <p>可預定日期</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#dateModal">查看</a>
+                    </div>
+                </div>
+                <hr>
+                
+                <div class="row no-gutters introduce-mid">
+                    <div class="col-sm-10">
+                        <p>聯絡狗狗的主人</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="" class="btn btn-outline-success my-2 my-sm-0">聯絡</a>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row no-gutters introduce-mid">
+                    <div class="col-sm-10">
+                        <p>寄養規則</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#fosterModal">查看</a>
+                    </div>
+                </div>
+                <br>
+                
+                <div class="modal-footer row justify-content-between">
+                    <div class="col ml-5">
+                        <h4 id="html_residential_location1">632雲林縣虎尾鎮建成路</h4>
+                    </div>
+                    <div class="col-4">
+                        <a type="button" class="btn btn-warning" id="html_reservation" href="">立即預定</a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!--互動視窗 可預定日期-->
+<div class="modal fade" id="dateModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="dateModalLabel">可預定日期</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>可預定日期</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--互動視窗 寄養規則-->
+<div class="modal fade" id="fosterModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="fosterModalLabel">寄養規則</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>寄養規則</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

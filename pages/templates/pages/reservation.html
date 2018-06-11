@@ -1,0 +1,56 @@
+{% extends 'pages/base_log.html' %}
+
+{% block title %}預約 | {{ block.super }}{% endblock title %}
+
+{% block body %}
+{{ block.super }}
+    
+    <form class="form-signin was-validated" action="" method="post">
+    {% csrf_token %}
+        <div class="text-center mb-4">
+            <img class="mb-4" src="/static/other/bootstrap-solid.svg" alt="" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">預約</h1>
+            <p>{{ whouser.name }}</p>
+            
+        </div>
+
+        {% if error_message %}
+            <div class="alert alert-warning" role="alert">
+                {{ error_message }}
+            </div>
+        {% endif %}
+        <div class="form-label-group">
+            <input type="date" name="date_start" id="date_start" class="form-control" placeholder="選擇預約日期" required="" autofocus="">
+            <label for="date_start">選擇開始日期</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="time" name="time_start" id="time_start" class="form-control" placeholder="選擇預約時間" required="">
+            <label for="time_start">選擇開始時間</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="date" name="date_end" id="date_end" class="form-control" placeholder="選擇預約日期" required="">
+            <label for="date_end">選擇結束日期</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="time" name="time_end" id="time_end" class="form-control" placeholder="選擇預約時間" required="">
+            <label for="time_end">選擇結束時間</label>
+        </div>
+
+
+        <div class="form-label-group">
+            <input type="text" name="username" id="username" class="form-control" placeholder="用戶帳號" required="">
+            <label for="username">用戶帳號</label>
+        </div>
+
+        <div class="form-label-group">
+            <input type="password" name="password" id="password" minlength="8" pattern="[0-9a-zA-Z]{8,}" class="form-control" placeholder="用戶密碼" required="">
+            <label for="password">用戶密碼</label>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" style="cursor: pointer;">登入</button>
+    </form>
+
+{% endblock body %}
