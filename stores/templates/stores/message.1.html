@@ -1,0 +1,94 @@
+{% extends 'stores/base.html' %}
+
+{% block title %}消息 | {{ block.super }}{% endblock title %}
+
+
+{% block nav4 %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'message' %}"><strong>消息</strong></a>
+    </li>
+{% endblock nav4 %}
+
+
+{% block main %}
+{{ block.super }}
+<div class="introduce-bg2 introduce-mid">
+    <h1><span class="badge badge-secondary">消息</span></h1>
+    <!--h4><I>做不太出來...</I>😭😭😭</h4-->
+
+    <div class="container">
+        
+        <table class="table table-bordered table-hover">
+            {% for thisuser in chat_users %}
+            <tr style="cursor: pointer;">
+                <td>
+                    <div class="row align-items-center" onclick="location.href='/message_user/{{thisuser.account}}'">
+                        <div class="col-2">
+                            <img src='/media/{{ thisuser.picture }}' width="100%" alt="user_pictures" class="rounded-circle"/>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col p-0">
+                                    <h5><b>{{thisuser.name}}</b></h5>
+                                </div>
+                                <div class="col text-right">
+                                    <small class="html_datetime text-muted">1天1小時1分1秒 前</small>
+                                </div>
+                            </div>
+                            <div class="row">
+                                {{message.text}}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock main %}
+
+
+{% block script %}
+<script type="text/javascript">
+    var t1 = {{t1|safe}};
+    var t2 = {{t2|safe}};
+    var td = {{td|safe}};
+    console.log(t1);
+    console.log(t2);
+    console.log(td);
+
+    var a = {{m|safe}};
+    var t = a.timestamp
+    //console.log(t)
+
+    var Date_A = new Date(t.slice(0,4),t.slice(5,7),t.slice(8,10),t.slice(11,13),t.slice(14,16),t.slice(17,19));  
+    Date_A.setHours(Date_A.getHours() + 8);
+    var Date_B = new Date();
+    var Date_BB = new Date(Date_B.getFullYear(),Date_B.getMonth()+1,Date_B.getDate(),Date_B.getHours(),Date_B.getMinutes(),Date_B.getSeconds());
+    var Date_C = new Date(Date_BB - Date_A);
+
+    var days=Math.floor(Date_C/(24*3600*1000))
+
+    var leave1=Date_C%(24*3600*1000)
+    var hours=Math.floor(leave1/(3600*1000))
+
+    var leave2=leave1%(3600*1000)
+    var minutes=Math.floor(leave2/(60*1000))
+
+    var leave3=leave2%(60*1000)
+    var seconds=Math.round(leave3/1000)
+        
+    var datetime_text = days + "天" + hours + "小時" + minutes + "分" + seconds + "秒 前";
+    
+    $(".html_datetime").ready(function(){
+        $(".html_datetime").text(td);
+    });
+
+
+</script>
+
+{% endblock script %}

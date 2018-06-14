@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
+
 class Alluser(models.Model):
     account = models.CharField(max_length=30)
     name = models.CharField(max_length=20)
@@ -28,13 +29,14 @@ class Dogs(models.Model):
     gender = models.CharField(max_length=10)
     age = models.DecimalField(max_digits=3,decimal_places=0)
     breed = models.CharField(max_length=20)
-    character = models.CharField(max_length=200)
-    favorite_food = models.CharField(max_length=200)
+    character = models.CharField(max_length=200,blank=True)
+    favorite_food = models.CharField(max_length=200,blank=True)
     is_foster = models.BooleanField(default = False)
     master = models.ForeignKey(Alluser,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
+
 
 class GPSs(models.Model):
     date = models.DateField(auto_now_add=True)
@@ -43,18 +45,34 @@ class GPSs(models.Model):
     longitude = models.DecimalField(max_digits=10,decimal_places=6) #經度
     dog = models.ForeignKey(Dogs,on_delete=models.CASCADE)
     
+    def __str__(self):
+        return self.name
 
-'''class Chat(models.Model):
-    sender = models.ForeignKey(Alluser,on_delete=models.CASCADE)
-    content = models.TextField()
-    time = models.DateTimeField(auto_now_add=True, null=True)
-
-    def __unicode__(self):
-        return u'%s' % self.content
-    '''
 
 class Message(models.Model):
     account = models.CharField(max_length=30)
     name = models.CharField(max_length=20)
     text = models.CharField(max_length=255)
     timestamp = models.DateTimeField(default = timezone.now)
+
+    def __str__(self):
+        return self.name
+
+
+class KeyM(models.Model):
+    key = models.CharField(max_length=30)
+    user = models.CharField(max_length=30,blank=True,null=True)
+    timestamp = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.key
+
+
+class Reservation(models.Model):
+    employee = models.ForeignKey(Alluser,on_delete=models.CASCADE,related_name='employee_user')
+    employer = models.ForeignKey(Alluser,on_delete=models.CASCADE,related_name='employer_user')
+    dog = models.ForeignKey(Dogs,on_delete=models.CASCADE)
+    datetime_start = models.DateTimeField()
+    datetime_end = models.DateTimeField()
+    note = models.CharField(max_length=300)
+

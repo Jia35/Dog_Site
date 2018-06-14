@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from stores.models import Alluser, Dogs, GPSs, Message
+from django.http import HttpResponseRedirect, HttpResponse
+from stores.models import Alluser, Dogs, GPSs, Message, Reservation
 from django.forms.models import model_to_dict
 
 from django.contrib import auth
@@ -9,6 +10,12 @@ from django.core.serializers.json import DjangoJSONEncoder
 import json
 import time
 import datetime
+import math
+
+import sys, os
+BASE_DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))    #__file__獲取執行文檔相對路徑，整行為取上一級的上一級目錄
+sys.path.append(BASE_DIR)   #添加路徑
+import cal_datetime
 
 
 @login_required
@@ -65,10 +72,21 @@ def foster(request):
 def message(request):
     username = request.user.username
     myuser = Alluser.objects.get(account=username)
-    message = Message.objects.order_by('-timestamp').values()[0]
     
-    m = json.dumps(message, cls=DjangoJSONEncoder)
-    
+    message = Message.objects.order_by('-timestamp')[0]
+    m_time = datetime.datetime.strptime(str(message.timestamp)[:19], '%Y-%m-%d %H:%M:%S') + datetime.timedelta(hours=8)
+    now = datetime.datetime.now()
+
+    diff_t = cal_datetime.DiffDatetime(now, m_time)
+
+    t1 = str(now)
+    t2 = str(m_time)
+    td = str(diff_t.to_str_simplify())
+    t1 = json.dumps(t1, cls=DjangoJSONEncoder)
+    t2 = json.dumps(t2, cls=DjangoJSONEncoder)
+    td = json.dumps(td, cls=DjangoJSONEncoder)
+
+
     chat_userss = myuser.chat_user.split(',');
     chat_users = []
     for account in chat_userss:
@@ -76,34 +94,51 @@ def message(request):
         chat_users.append(oneuser)
 
     alluser = Alluser.objects.all()
-    return render(request, 'stores/message.html', locals())
-'''
-    if 'nickname' in request.POST and 'text' in request.POST:
-        nickname = request.POST.get('nickname')
-        text = request.POST.get('text')
-    
-        if nickname and text:
-            m = Message.objects.create(nickname=nickname, text=text)
-            m.save()
 
-    messages = Message.objects.order_by('timestamp')
-    #return render_to_response('index.html', locals(), context_instance=RequestContext(request))
+
+    the_reservation = Reservation.objects.filter(employee=myuser)
+    #the_reservation.dog
+    print(the_reservation[0].dog.breed)
     return render(request, 'stores/message.html', locals())
-'''
+
 
 @login_required
 def message_user(request,id):
     account = request.user.username
+    myuser = Alluser.objects.get(account=account)
+    whouser = Alluser.objects.get(account=id)
     messages = Message.objects.order_by('timestamp')
     who = id
+
+    messages_val = messages.values()    #_list
+    
+    messages_time=[]
+    for message in messages:
+        m_time = datetime.datetime.strptime(str(message.timestamp)[:19], '%Y-%m-%d %H:%M:%S') + datetime.timedelta(hours=8)
+        now = datetime.datetime.now()
+        
+        diff_t = cal_datetime.DiffDatetime(now, m_time)
+        messages_time.append( diff_t.to_str_simplify() )
+
+    for index, message in enumerate(messages_val):
+        message["messages_time"] = messages_time[index]
+        message["picture"] = str(whouser.picture)
+
+    messages_js = json.dumps(list(messages_val), cls=DjangoJSONEncoder)
+    
+
+    if 'message_text' in request.POST:
+        message = Message(account=account, name=myuser.name, text=request.POST.get('message_text'))
+        message.save()
+        return HttpResponseRedirect(request.path)
+
     return render(request, 'stores/message_user.html', locals())
 
 
 @login_required
 def mine(request):
-    #if request.user.is_authenticated:
-    username = request.user.username
-    myuser = Alluser.objects.get(account=username)
+    account = request.user.username
+    myuser = Alluser.objects.get(account=account)
     mydog = myuser.dogs_set.all()
     if 'edit' in request.POST:
         isEdit = True
@@ -149,8 +184,8 @@ def mine(request):
 
 @login_required
 def collection(request):
-    username = request.user.username
-    myuser = Alluser.objects.get(account=username)
+    account = request.user.username
+    myuser = Alluser.objects.get(account=account)
     
     collection_users = myuser.collection_user.split(',');
 
@@ -189,8 +224,8 @@ def user_info(request,id):
 
 @login_required
 def setting(request):
-    username = request.user.username
-    myuser = Alluser.objects.get(account=username)
+    account = request.user.username
+    myuser = Alluser.objects.get(account=account)
     # alluser = Alluser.objects.all()
     # alldog = Dogs.objects.all()
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Alluser, Dogs, GPSs, Message
+from .models import Alluser, Dogs, GPSs, Message, KeyM, Reservation
 
 
 @admin.register(Alluser)
@@ -25,5 +25,16 @@ class GPSsAdmin(admin.ModelAdmin):
 class MessageAdmin(admin.ModelAdmin):
     list_display = ('account', 'text', 'timestamp')
     #ordering = ('date', 'time')
+
+@admin.register(KeyM)
+class KeyMAdmin(admin.ModelAdmin):
+    list_display = ('key', 'user', 'timestamp')
+    #ordering = ('date', 'time')
+
+@admin.register(Reservation)
+class ReservationAdmin(admin.ModelAdmin):
+    list_display = ('employee', 'employer', 'dog', 'datetime_start', 'datetime_end', 'note')
+    #ordering = ('employer', 'employee', 'dog')
+
 
 #admin.site.register(Comment)

@@ -14,6 +14,8 @@
 
 <div class="introduce-bg2 introduce-mid">
     <h1><span class="badge badge-secondary">關於</span></h1>
+    <span id='clock'></span>
+
 
     <div id="accordion">
         <div class="card">
@@ -122,5 +124,12 @@
 {% block script %}
 {{ block.super }}
 
+<script type="text/javascript">
+    function showtime(){
+        document.getElementById('clock').innerHTML = new Date().toTimeString();
+    }
+    setInterval("showtime()",1000);
+
+</script>
 
 {% endblock script %}

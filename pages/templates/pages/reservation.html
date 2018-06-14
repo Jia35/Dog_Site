@@ -9,48 +9,106 @@
     {% csrf_token %}
         <div class="text-center mb-4">
             <img class="mb-4" src="/static/other/bootstrap-solid.svg" alt="" width="72" height="72">
-            <h1 class="h3 mb-3 font-weight-normal">預約</h1>
-            <p>{{ whouser.name }}</p>
             
+            <h3 class="font-weight-normal">預約 </h3>
+            <h5>{{whouser.name}}({{whouser.account}})</h5>
         </div>
 
-        {% if error_message %}
+        {% if dog_is_wrong %}
             <div class="alert alert-warning" role="alert">
-                {{ error_message }}
+                {{ dog_is_wrong }}
             </div>
         {% endif %}
         <div class="form-label-group">
-            <input type="date" name="date_start" id="date_start" class="form-control" placeholder="選擇預約日期" required="" autofocus="">
-            <label for="date_start">選擇開始日期</label>
+            <select name="sel_dog" id="sel_dog" class="form-control" value="{{sel_dog}}" required="" autofocus="">
+                {% if sel_dog %}
+                    <option value="{{sel_dog}}" selected hidden>{{sel_dog}}</option>
+                {% else %}
+                    <option value="" selected disabled hidden>哪隻狗要寄養...</option>
+                {% endif %}
+            </select>
+        </div>
+
+        {% if time_is_wrong %}
+            <div class="alert alert-warning" role="alert">
+                {{ time_is_wrong }}
+            </div>
+        {% endif %}
+        <div class="form-label-group">
+            <input type="date" name="date_start" id="date_start" class="form-control" placeholder="選擇開始日期" value="{{date_start}}" required="">
+            <label for="date_start">選擇開始日期*</label>
         </div>
 
         <div class="form-label-group">
-            <input type="time" name="time_start" id="time_start" class="form-control" placeholder="選擇預約時間" required="">
-            <label for="time_start">選擇開始時間</label>
+            <input type="time" name="time_start" id="time_start" class="form-control" placeholder="選擇開始時間" value="{{time_start}}" required="">
+            <label for="time_start">選擇開始時間*</label>
         </div>
 
         <div class="form-label-group">
-            <input type="date" name="date_end" id="date_end" class="form-control" placeholder="選擇預約日期" required="">
-            <label for="date_end">選擇結束日期</label>
+            <input type="date" name="date_end" id="date_end" class="form-control" placeholder="選擇結束日期" value="{{date_end}}" required="">
+            <label for="date_end">選擇結束日期*</label>
         </div>
 
         <div class="form-label-group">
-            <input type="time" name="time_end" id="time_end" class="form-control" placeholder="選擇預約時間" required="">
-            <label for="time_end">選擇結束時間</label>
+            <input type="time" name="time_end" id="time_end" class="form-control" placeholder="選擇結束時間" value="{{time_end}}" required="">
+            <label for="time_end">選擇結束時間*</label>
         </div>
 
-
-        <div class="form-label-group">
-            <input type="text" name="username" id="username" class="form-control" placeholder="用戶帳號" required="">
-            <label for="username">用戶帳號</label>
+        <div class="form-group">
+            <label for="note">備註</label>
+            <textarea class="form-control" name="note" id="note" rows="2" placeholder="留言內容...">{{note}}</textarea>
         </div>
 
-        <div class="form-label-group">
-            <input type="password" name="password" id="password" minlength="8" pattern="[0-9a-zA-Z]{8,}" class="form-control" placeholder="用戶密碼" required="">
-            <label for="password">用戶密碼</label>
-        </div>
-
-        <button class="btn btn-lg btn-primary btn-block" type="submit" style="cursor: pointer;">登入</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" style="cursor: pointer;">預約寄養</button>
     </form>
 
 {% endblock body %}
+
+
+{% block script %}
+{{ block.super }}
+<script type="text/javascript">
+    var mydogs = {{mydogs|safe}};
+    var today = new Date();
+
+    //document.getElementById("date_start").Value = (today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()).toString();
+    //document.getElementById("time_start").defaultValue = "09:00";
+    //console.log((today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()).toString())
+    //console.log(today.getFullYear()+(today.getMonth()+1)+today.getDate())
+    
+
+    $(function(){
+        for( i in mydogs){
+            $("#sel_dog").append($("<option value='" + mydogs[i].name + "'>" + mydogs[i].name + "</option>"));
+        }
+    });
+
+    $('#date_start').ready(function(){
+        if ( $("#date_start").val()=="" ){
+            $("#date_start").val( today.getFullYear()+'-'+('0'+(today.getMonth()+1)).slice(-2)+'-'+('0'+today.getDate()).slice(-2) );
+        }
+
+
+    })
+    $('#date_start').blur(function(){
+        if ( $("#date_end").val()=="" ){
+            $("#date_end").val( $("#date_start").val() );
+        }
+    })
+
+    $('#time_start').ready(function(){
+        if ( $("#time_start").val()=="" ){
+            $("#time_start").val( "09:00" );
+        }
+    })
+    $("#time_start").blur(function(){
+        if ( $("#time_end").val()=="" ){
+            $("#time_end").val( $("#time_start").val() );
+        }
+    });
+
+</script>
+{% endblock script %}
+
+
+
