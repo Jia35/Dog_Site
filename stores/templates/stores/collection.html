@@ -101,6 +101,7 @@
         modal.find('#html_evaluation').text(clickUser.evaluation)
         modal.find('#html_introduce').text(clickUser.introduce)
         document.getElementById('html_reservation').href = "/reservation/" + clickUser.account;
+        document.getElementById('html_message').href = "/message_user/" + clickUser.account;
 
         if (clickDog){
             modal.find('#html_dbreed').text(clickDog.breed)

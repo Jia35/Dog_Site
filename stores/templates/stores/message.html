@@ -13,11 +13,11 @@
 {% block main %}
 {{ block.super }}
 <div class="introduce-bg2 introduce-mid">
-    <h1><span class="badge badge-secondary">消息</span></h1>
+    <h1><span class="badge badge-secondary">訊息</span></h1>
     <!--h4><I>做不太出來...</I>😭😭😭</h4-->
 
     <div class="container">
-        <h3><span class="badge badge-secondary">通知</span></h3>
+        <h3><span class="badge badge-secondary">寄養</span></h3>
         <table class="table table-bordered table-hover">
             {% for r in the_reservation %}
             <tr style="cursor: pointer;">
@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="col-auto pl-0">
-                            代養：{{r.employer}}
+                            代養：<a href="/message_user/{{r.employer.account}}">{{r.employer}}</a>
                         </div>
 
                         <div class="col">
@@ -70,7 +70,7 @@
             {% endfor %}
         </table>
 
-        <h3><span class="badge badge-secondary">訊息</span></h3>
+        <h3><span class="badge badge-secondary">聊天</span></h3>
         <table class="table table-bordered table-hover">
             {% for thisuser in chat_users %}
             <tr style="cursor: pointer;">
@@ -97,34 +97,6 @@
             </tr>
             {% endfor %}
         </table>
-        
-        <!--h3><span class="badge badge-secondary">訊息</span></h3>
-        <table class="table table-bordered table-hover">
-            {% for thisuser in chat_users %}
-            <tr style="cursor: pointer;">
-                <td>
-                    <div class="row align-items-center" onclick="location.href='/message_user/{{thisuser.account}}'">
-                        <div class="col-2">
-                            <img src='/media/{{ thisuser.picture }}' width="100%" alt="user_pictures" class="rounded-circle"/>
-                        </div>
-                        <div class="col">
-                            <div class="row">
-                                <div class="col p-0">
-                                    <h5><b>{{thisuser.name}}</b></h5>
-                                </div>
-                                <div class="col text-right">
-                                    <small class="html_datetime text-muted">1天1小時1分1秒 前</small>
-                                </div>
-                            </div>
-                            <div class="row">
-                                {{message.text}}
-                            </div>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            {% endfor %}
-        </table-->
 
     </div>
 

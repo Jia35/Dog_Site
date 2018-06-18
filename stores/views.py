@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
-from stores.models import Alluser, Dogs, GPSs, Message, Reservation
+from stores.models import Alluser, Dogs, GPSs, Message, KeyM, Reservation
 from django.forms.models import model_to_dict
 
 from django.contrib import auth
@@ -226,6 +226,8 @@ def user_info(request,id):
 def setting(request):
     account = request.user.username
     myuser = Alluser.objects.get(account=account)
+
+    key = KeyM.objects.get(user=account)
     # alluser = Alluser.objects.all()
     # alldog = Dogs.objects.all()
 

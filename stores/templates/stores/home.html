@@ -39,7 +39,7 @@
         </form>
 
         {% if not gpshtml %}
-            <p>請選擇有GPS紀錄的日期--6/10</p>
+            <p>請選擇有GPS紀錄的日期--6/14</p>
         {% else %}
             <div id="map" class="my-3"></div>
             
@@ -106,7 +106,8 @@
             var beachMarker = new google.maps.Marker({
                 position: {lat: area.lat, lng: area.lng},
                 map: map,
-                title: '地點'+area.time.substr(0,5)
+                icon:'/static/images/icon/map_marker.png',
+                title: '時間:'+area.time.substr(0,5)
             });
         })
         //if (place.length > 1)

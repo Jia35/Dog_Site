@@ -51,7 +51,7 @@
                     <div class="col-sm-6">
                         <div class="row introduce-mid">
                             <div class="col-sm-4">
-                                <img src="/static/images/icon/plain-dog.png"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
+                                <img src="/static/images/icon/plain-dog.png" class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
                             </div>
                             <div class="col-sm-6">
                                 <span id="html_dbreed" class="align-middle">小鬥犬</span>
@@ -60,7 +60,7 @@
                         
                         <div class="row introduce-mid">
                             <div class="col-sm-4">
-                                <img src="/static/images/icon/flash.png"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
+                                <img src="/static/images/icon/flash.png" class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
                             </div>
                             <div class="col-sm-6">
                                 <span id="html_dcharacter" class="align-middle">溫和</span>
@@ -71,7 +71,7 @@
                     <div class="col-sm-6">
                         <div class="row  introduce-mid">
                             <div class="col-sm-4">
-                                <img src="/static/images/icon/age.svg"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
+                                <img src="/static/images/icon/age.svg" class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
                             </div>
                             <div class="col-sm-6">
                                 <span id="html_dage" class="align-middle">3 歲</span>
@@ -80,7 +80,7 @@
                         
                         <div class="row introduce-mid">
                             <div class="col-sm-4">
-                                <img src="/static/images/icon/res.png"  class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
+                                <img src="/static/images/icon/res.png" class="rounded mx-auto d-block introduce-mid icon-width" alt="Responsive image" >
                             </div>
                             <div class="col-sm-6">
                                 <span id="html_dfavorite_food" class="align-middle">高麗菜</span>
@@ -100,7 +100,8 @@
                 
                 <div class="row no-gutters introduce-mid">
                     <div class="row no-gutters introduce-mid">
-                        <p><i>這裏面放遛狗的GPS路徑圖</i></p>
+                        <p class="mb-0">遛狗GPS路徑圖</p>
+                        <img src="/static/images/map_.jpg" width="100%" height="100%" alt="map_.jpg" >
                     </div>
                 </div>
                 <hr>
@@ -120,7 +121,7 @@
                         <p>聯絡狗狗的主人</p>
                     </div>
                     <div class="col-sm-2">
-                        <a href="" class="btn btn-outline-success my-2 my-sm-0">聯絡</a>
+                        <a href="" id="html_message" class="btn btn-outline-success my-2 my-sm-0">聯絡</a>
                     </div>
                 </div>
                 <hr>
@@ -161,8 +162,32 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <p>可預定日期</p>
+            <div class="modal-body">                
+                <table class="table table-bordered table-hover order-table">
+                    <thead style="background-color:#d8d8d8;">
+                        <tr>
+                        <th>星期一</th>
+                        <th>星期二</th>
+                        <th>星期三</th>
+                        <th>星期四</th>
+                        <th>星期五</th>
+                        <th>星期六</th>
+                        <th>星期日</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> X </td>
+                            <td> X </td>
+                            <td> X </td>
+                            <td> X </td>
+                            <td> O </td>
+                            <td> O </td>
+                            <td> O </td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
@@ -182,7 +207,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>寄養規則</p>
+                <ul>
+                    <li>寄養規則內容1</li>
+                    <li>寄養規則內容2</li>
+                    <li>寄養規則內容3</li>
+                    <li>寄養規則內容4</li>
+                    <li>寄養規則內容5</li>
+                </ul>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>

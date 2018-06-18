@@ -45,7 +45,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="cursor: pointer;" data-toggle="modal" data-target="#fosterModal">
+                <td style="cursor: pointer;" onclick="location.href='/message/'">
                     <img src='/static/images/icon/chat.svg' width="10%" alt="contract"/>
                     <span class="pl-2">寄養訊息</span>
                 </td>
@@ -72,26 +72,6 @@
     </table>
 
 
-    <!--互動視窗 寄養訊息-->
-    <div class="modal fade" id="fosterModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">寄養訊息</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>寄養訊息</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!--互動視窗 設備訊息-->
     <div class="modal fade" id="deviceModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -103,7 +83,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>設備訊息</p>
+                    <p>裝置key碼：{{ key.key }}</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
@@ -130,7 +110,7 @@
                     </div>
                     <div class="form-group">
                         <label for="message">建議或反饋</label>
-                        <textarea class="form-control" id="message" name="message" placeholder="意見或反饋..." rows="3"></textarea>
+                        <textarea class="form-control" id="message" name="message" placeholder="意見或反饋..." rows="5"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
